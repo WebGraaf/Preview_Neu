@@ -96,7 +96,7 @@ const Header: React.FC = () => {
       <div className="relative">
         {/* White Bar on the left side */}
         <div className="absolute left-0 top-0 w-[30%] md:w-1/5 bg-white z-10 h-[110%]" style={{ clipPath: 'polygon(0 0, 100% 0, 80% 100%, 0 100%)', boxShadow: '4px 4px 10px rgba(0,0,0,0.1)' }}>
-          <Link to="/" onClick={closeMenus} className="absolute inset-0 flex items-center justify-center py-1 transition-transform duration-200 hover:scale-105">
+          <Link to="/" onClick={closeMenus} className="absolute inset-0 flex items-center justify-center py-1 transition-transform duration-200 hover:scale-105 pr-[15%]">
             <img src={logo} alt="Führerschein Website" className="w-full h-full object-contain" />
           </Link>
         </div>
@@ -104,8 +104,8 @@ const Header: React.FC = () => {
         <div className={`bg-primary-500 pl-[30%] md:pl-[22%] md:pr-[300px] transition-all duration-300 ${isScrolled ? 'py-2 md:py-1' : 'py-3 md:py-2'}`}>
           <div className="px-4">
             <div className="flex items-center justify-between md:justify-center md:pr-[100px]">
-              <div className="flex items-center">
-                <div className="flex md:hidden items-center space-x-2 text-inverse text-xs font-medium">
+              <div className="flex items-center flex-1 md:flex-none justify-start pl-[20%] md:pl-0">
+                <div className="flex md:hidden flex-col items-center space-y-2 text-inverse text-xs font-medium">
                   <div className="flex items-center space-x-1">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
