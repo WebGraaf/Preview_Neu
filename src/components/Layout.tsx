@@ -83,15 +83,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
       <main className="flex-grow">{children}</main>
-      <footer className="relative bg-gradient-to-b from-neutral-800 to-neutral-900 text-white pt-16 pb-8">
+      <footer className="relative bg-gradient-to-b from-neutral-800 to-neutral-900 text-white pt-12 md:pt-14 lg:pt-16 pb-6 md:pb-8">
         {/* Top border accent */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500"></div>
         
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12">
             {/* Company Info */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-white tracking-wide">DriveAcademy GmbH</h3>
+            <div className="space-y-3 md:space-y-4">
+              <h3 className="text-base md:text-lg font-bold text-white tracking-wide">DriveAcademy GmbH</h3>
               <p className="text-sm text-neutral-300 leading-relaxed">
                 Hauptstraße 123<br />
                 10115 Berlin<br />
@@ -101,9 +101,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
 
             {/* Contact */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-white tracking-wide">Kontakt</h3>
-              <div className="space-y-3 text-sm">
+            <div className="space-y-3 md:space-y-4">
+              <h3 className="text-base md:text-lg font-bold text-white tracking-wide">Kontakt</h3>
+              <div className="space-y-2 md:space-y-3 text-sm">
                 <p>
                   <a
                     href="tel:+493012345678"
@@ -135,9 +135,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
 
             {/* Quick Links */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-white tracking-wide">Schnellzugriff</h3>
-              <div className="space-y-3 text-sm">
+            <div className="space-y-3 md:space-y-4">
+              <h3 className="text-base md:text-lg font-bold text-white tracking-wide">Schnellzugriff</h3>
+              <div className="space-y-2 md:space-y-3 text-sm">
                 <Link
                   to="/"
                   className="block text-neutral-300 hover:text-primary-300 hover:translate-x-1 transition-all duration-300"
@@ -166,9 +166,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
 
             {/* Legal */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-white tracking-wide">Rechtliches</h3>
-              <div className="space-y-3 text-sm">
+            <div className="space-y-3 md:space-y-4">
+              <h3 className="text-base md:text-lg font-bold text-white tracking-wide">Rechtliches</h3>
+              <div className="space-y-2 md:space-y-3 text-sm">
                 <Link
                   to="/datenschutz"
                   className="block text-neutral-300 hover:text-primary-300 hover:translate-x-1 transition-all duration-300"
@@ -192,8 +192,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-12 pt-8 border-t border-neutral-700/50 text-center">
-            <p className="text-sm text-neutral-400">
+          <div className="mt-8 md:mt-10 lg:mt-12 pt-6 md:pt-8 border-t border-neutral-700/50 text-center">
+            <p className="text-xs md:text-sm text-neutral-400">
               Geschäftsführer: Michael Schmidt | Fahrlehrererlaubnis: FL-2024-12345
             </p>
           </div>

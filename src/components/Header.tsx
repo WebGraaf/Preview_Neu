@@ -90,22 +90,22 @@ const Header: React.FC = () => {
     <header className={`sticky top-0 z-50 pt-0 pb-0 border-b-4 border-primary-500 relative transition-all duration-300 ${isHeaderVisible ? '' : '-translate-y-full'} ${isScrolled ? 'shadow-xl' : 'shadow-lg'}`}>
       {/* Backdrop overlay for mobile menu */}
       <div
-        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={closeMenus}
       />
       <div className="relative">
         {/* White Bar on the left side */}
-        <div className="absolute left-0 top-0 w-[30%] md:w-1/5 bg-white z-10 h-[110%]" style={{ clipPath: 'polygon(0 0, 100% 0, 80% 100%, 0 100%)', boxShadow: '4px 4px 10px rgba(0,0,0,0.1)' }}>
+        <div className="absolute left-0 top-0 w-[30%] md:w-[25%] lg:w-1/5 bg-white z-10 h-[110%]" style={{ clipPath: 'polygon(0 0, 100% 0, 80% 100%, 0 100%)', boxShadow: '4px 4px 10px rgba(0,0,0,0.1)' }}>
           <Link to="/" onClick={closeMenus} className="absolute inset-0 flex items-center justify-center py-1 transition-transform duration-200 hover:scale-105 pr-[15%]">
             <img src={logo} alt="Führerschein Website" className="w-full h-full object-contain" />
           </Link>
         </div>
         {/* Top Bar - Contact Information */}
-        <div className={`bg-primary-500 pl-[30%] md:pl-[22%] md:pr-[300px] transition-all duration-300 ${isScrolled ? 'py-2 md:py-1' : 'py-3 md:py-2'}`}>
+        <div className={`bg-primary-500 pl-[30%] md:pl-[26%] lg:pl-[22%] md:pr-[60px] lg:pr-[300px] transition-all duration-300 ${isScrolled ? 'py-2 md:py-1' : 'py-3 md:py-2'}`}>
           <div className="px-4">
-            <div className="flex items-center justify-between md:justify-center md:pr-[100px]">
-              <div className="flex items-center flex-1 md:flex-none justify-start pl-[20%] md:pl-0">
-                <div className="flex md:hidden flex-col items-center space-y-2 text-inverse text-xs font-medium">
+            <div className="flex items-center justify-between lg:justify-center md:pr-[50px] lg:pr-[100px]">
+              <div className="flex items-center flex-1 lg:flex-none justify-start pl-[20%] md:pl-[10%] lg:pl-0">
+                <div className="flex lg:hidden flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 text-inverse text-xs md:text-sm font-medium">
                   <div className="flex items-center space-x-1">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
@@ -123,7 +123,7 @@ const Header: React.FC = () => {
                     <span>{email}</span>
                   </div>
                 </div>
-                <div className="hidden md:flex items-center space-x-4 text-inverse text-sm font-semibold">
+                <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 text-inverse text-sm font-semibold">
                   <div className="flex items-center space-x-1">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
@@ -150,7 +150,7 @@ const Header: React.FC = () => {
               {/* Mobile Menu Button - Hamburger to X animation */}
               <button
                 onClick={toggleMobileMenu}
-                className="md:hidden text-white hover:text-primary-200 font-bold p-2 rounded-lg transition-all duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                className="lg:hidden text-white hover:text-primary-200 font-bold p-2 rounded-lg transition-all duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={isMobileMenuOpen}
               >
@@ -168,11 +168,11 @@ const Header: React.FC = () => {
         </div>
 
         {/* Bottom Bar - Navigation */}
-        <div className={`bg-neutral-500 hidden md:block pl-[22%] pr-[300px] transition-all duration-300 ${isScrolled ? 'py-3' : 'py-4'}`}>
+        <div className={`bg-neutral-500 hidden lg:block pl-[22%] pr-[120px] xl:pr-[300px] transition-all duration-300 ${isScrolled ? 'py-3' : 'py-4'}`}>
           <div className="px-4">
             <div className="relative flex items-center justify-between">
               {/* Desktop Navigation */}
-              <nav className="hidden md:flex flex-1 justify-center space-x-8 text-white font-bold">
+              <nav className="hidden lg:flex flex-1 justify-center space-x-4 xl:space-x-8 text-white font-bold">
                 <Link
                   to="/"
                   className={`relative py-1 transition-all duration-200 font-bold group
@@ -254,7 +254,7 @@ const Header: React.FC = () => {
               {/* CTA Button */}
               <Link
                 to="/anmelden"
-                className="hidden md:block bg-primary-500 text-white px-5 py-2.5 rounded-lg transition-all duration-200 ml-auto font-bold hover:bg-primary-600 hover:shadow-lg hover:shadow-primary-500/25 hover:-translate-y-0.5 active:scale-[0.98]"
+                className="hidden lg:block bg-primary-500 text-white px-3 xl:px-5 py-2 xl:py-2.5 rounded-lg transition-all duration-200 ml-auto font-bold text-sm xl:text-base hover:bg-primary-600 hover:shadow-lg hover:shadow-primary-500/25 hover:-translate-y-0.5 active:scale-[0.98] whitespace-nowrap"
                 onClick={closeMenus}
               >
                 anmelden
@@ -265,7 +265,7 @@ const Header: React.FC = () => {
       </div>
       {/* Mobile Navigation - Slide-in animation */}
       <div
-        className={`md:hidden fixed inset-x-0 top-[var(--header-height,80px)] bg-neutral-500/98 backdrop-blur-lg z-50 transition-all duration-300 ease-out transform ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
+        className={`lg:hidden fixed inset-x-0 top-[var(--header-height,80px)] bg-neutral-500/98 backdrop-blur-lg z-50 transition-all duration-300 ease-out transform ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
         style={{ maxHeight: 'calc(100vh - var(--header-height, 80px))', overflowY: 'auto' }}
       >
           <Container>
