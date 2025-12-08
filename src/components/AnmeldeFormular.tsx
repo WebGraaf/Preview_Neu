@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronDown, Calendar, Check, AlertCircle, Loader2 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -533,14 +534,23 @@ export const AnmeldeFormular: React.FC = () => {
                   </div>
                 </fieldset>
 
-                <button
-                  type="submit"
-                  disabled={true}
-                  className="submit-btn w-full py-4 bg-primary-500 text-white rounded-xl font-semibold shadow-lg shadow-primary-500/25 hover:bg-primary-600 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 disabled:bg-neutral-300 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:translate-y-0"
-                  style={{ opacity: 0, willChange: 'transform, opacity' }}
-                >
-                  Anmeldung abschicken
-                </button>
+                <div className="space-y-3">
+                  <p className="text-xs text-neutral-500 text-center">
+                    Mit dem Absenden dieses Formulars erklären Sie sich mit unserer{' '}
+                    <Link to="/datenschutz" className="text-primary-500 hover:text-primary-600 underline">
+                      Datenschutzerklärung
+                    </Link>{' '}
+                    einverstanden.
+                  </p>
+                  <button
+                    type="submit"
+                    disabled={true}
+                    className="submit-btn w-full py-4 bg-primary-500 text-white rounded-xl font-semibold shadow-lg shadow-primary-500/25 hover:bg-primary-600 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 disabled:bg-neutral-300 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                    style={{ opacity: 0, willChange: 'transform, opacity' }}
+                  >
+                    Anmeldung abschicken
+                  </button>
+                </div>
               </form>
             )}
 

@@ -192,9 +192,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-8 md:mt-10 lg:mt-12 pt-6 md:pt-8 border-t border-neutral-700/50 text-center">
+          <div className="mt-8 md:mt-10 lg:mt-12 pt-6 md:pt-8 border-t border-neutral-700/50 text-center space-y-2">
             <p className="text-xs md:text-sm text-neutral-400">
               Geschäftsführer: Michael Schmidt | Fahrlehrererlaubnis: FL-2024-12345
+            </p>
+            <p className="text-xs text-neutral-500">
+              Website erstellt von{' '}
+              <a
+                href="https://www.deine-fahrschul-website.de/"
+                target="_blank"
+                rel="noopener"
+                className="text-primary-400 hover:text-primary-300 transition-colors duration-300"
+              >
+                deine-fahrschul-website.de
+              </a>
             </p>
           </div>
         </Container>
