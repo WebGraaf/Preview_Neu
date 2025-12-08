@@ -202,10 +202,6 @@ export const TextGalerieStapel: React.FC<TextGalerieStapelProps> = ({
 
             {/* Steuerung & kleine Vorschau/Infos */}
             <div className="flex flex-col items-center py-6 carousel-controls">
-              <div className="text-center">
-                <div className="text-sm text-muted mb-3 font-medium bg-background-card/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">Bild {active + 1} / {images.length}</div>
-              </div>
-
               <div className="flex items-center gap-6 pt-2">
                 <button
                   type="button"

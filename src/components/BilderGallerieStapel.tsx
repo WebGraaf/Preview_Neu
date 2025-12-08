@@ -191,7 +191,7 @@ export default function BilderGallerieStapel({
         {/* Steuerung & kleine Vorschau/Infos */}
         <div ref={controlsRef} className="flex flex-col items-center py-6 carousel-controls" style={{ opacity: 0 }}>
           <div className="text-center">
-            <div className="text-sm text-muted mb-3 font-medium bg-background-card/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">Bild {active + 1} / {images.length}</div>
+            <div className="text-sm text-text-inverse mb-3 font-medium bg-primary/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-md">Bild {active + 1} / {images.length}</div>
           </div>
 
           <div className="flex items-center gap-6 pt-2">
