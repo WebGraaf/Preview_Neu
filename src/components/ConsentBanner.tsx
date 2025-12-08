@@ -39,10 +39,10 @@ export const ConsentBanner = ({ isVisible, onAccept, onDecline, onOpenSettings }
               <Cookie className="w-6 h-6 text-primary-600" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-base font-semibold text-heading">
+              <p className="text-base font-semibold text-text-heading">
                 Wir nutzen Cookies
               </p>
-              <p className="text-sm text-muted mt-1 leading-relaxed">
+              <p className="text-sm text-neutral-600 mt-1 leading-relaxed">
                 Für Google Maps & bessere Nutzererfahrung.{' '}
                 <button
                   onClick={() => setIsExpanded(true)}
@@ -59,16 +59,16 @@ export const ConsentBanner = ({ isVisible, onAccept, onDecline, onOpenSettings }
             <button
               onClick={onDecline}
               className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold
-                         bg-neutral-800 text-white hover:bg-neutral-700
-                         border border-neutral-800 transition-all duration-300 hover:shadow-md"
+                         bg-neutral-900 text-text-inverse hover:bg-neutral-800
+                         border border-neutral-900 transition-all duration-300 hover:shadow-md"
             >
               Ablehnen
             </button>
             <button
               onClick={onOpenSettings}
               className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold
-                         bg-white text-neutral-800 border border-neutral-300
-                         hover:bg-neutral-50 hover:border-neutral-400 transition-all duration-300 hover:shadow-md
+                         bg-background-card text-text-heading border border-border
+                         hover:bg-neutral-100 hover:border-neutral-400 transition-all duration-300 hover:shadow-md
                          flex items-center justify-center gap-1.5"
             >
               <Settings className="w-4 h-4" />
@@ -77,8 +77,8 @@ export const ConsentBanner = ({ isVisible, onAccept, onDecline, onOpenSettings }
             <button
               onClick={onAccept}
               className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold
-                         bg-neutral-800 text-white hover:bg-neutral-700
-                         border border-neutral-800 transition-all duration-300 hover:shadow-md"
+                         bg-neutral-900 text-text-inverse hover:bg-neutral-800
+                         border border-neutral-900 transition-all duration-300 hover:shadow-md"
             >
               Akzeptieren
             </button>
@@ -115,15 +115,17 @@ export const ConsentBanner = ({ isVisible, onAccept, onDecline, onOpenSettings }
         </div>
 
         {/* Description text - GDPR compliant */}
-        <div className="text-sm text-text leading-relaxed mb-4 bg-neutral-50 rounded-xl p-4 border border-neutral-100">
+        <div className="text-sm text-text leading-relaxed mb-4 bg-neutral-50 rounded-xl p-4 border border-neutral-200">
           <p>
             Wir nutzen Cookies und ähnliche Technologien. Bei „Alle akzeptieren" werden Daten (z.B. IP-Adresse)
-            an Google LLC (USA) übertragen.{' '}
-            <Link to="/datenschutz" className="text-primary-600 hover:text-primary-700 font-medium hover:underline transition-colors">
+            an Google LLC (USA) übertragen.
+          </p>
+          <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <Link to="/datenschutz" className="text-primary-600 hover:text-primary-700 font-semibold underline underline-offset-2 transition-colors">
               Datenschutzerklärung
             </Link>
-            {' '}·{' '}
-            <Link to="/impressum" className="text-primary-600 hover:text-primary-700 font-medium hover:underline transition-colors">
+            <span className="text-neutral-400">|</span>
+            <Link to="/impressum" className="text-primary-600 hover:text-primary-700 font-semibold underline underline-offset-2 transition-colors">
               Impressum
             </Link>
           </p>
@@ -134,7 +136,7 @@ export const ConsentBanner = ({ isVisible, onAccept, onDecline, onOpenSettings }
           <button
             onClick={onDecline}
             className="w-full sm:w-auto order-2 sm:order-1 px-5 py-3 rounded-xl text-sm font-semibold
-                       bg-primary-600 text-white hover:bg-primary-700
+                       bg-primary-600 text-primary-foreground hover:bg-primary-700
                        border border-primary-600 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
           >
             Nur Essenzielle
@@ -142,8 +144,8 @@ export const ConsentBanner = ({ isVisible, onAccept, onDecline, onOpenSettings }
           <button
             onClick={onOpenSettings}
             className="w-full sm:w-auto order-3 sm:order-2 px-5 py-3 rounded-xl text-sm font-semibold
-                       bg-white text-neutral-800 border border-neutral-300
-                       hover:bg-neutral-50 hover:border-neutral-400 transition-all duration-300 hover:shadow-md
+                       bg-background-card text-text-heading border border-border
+                       hover:bg-neutral-100 hover:border-neutral-400 transition-all duration-300 hover:shadow-md
                        flex items-center justify-center gap-2"
           >
             <Settings className="w-4 h-4" />
@@ -152,7 +154,7 @@ export const ConsentBanner = ({ isVisible, onAccept, onDecline, onOpenSettings }
           <button
             onClick={onAccept}
             className="w-full sm:w-auto sm:ml-auto order-1 sm:order-3 px-5 py-3 rounded-xl text-sm font-semibold
-                       bg-primary-600 text-white hover:bg-primary-700
+                       bg-primary-600 text-primary-foreground hover:bg-primary-700
                        border border-primary-600 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
           >
             Alle akzeptieren
@@ -160,7 +162,7 @@ export const ConsentBanner = ({ isVisible, onAccept, onDecline, onOpenSettings }
         </div>
 
         {/* Legal note */}
-        <p className="text-xs text-muted mt-4 text-center sm:text-left">
+        <p className="text-xs text-text-muted mt-4 text-center sm:text-left">
           Einwilligung jederzeit widerrufbar über „Privatsphäre" im Footer.
         </p>
       </div>

@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 import { GoogleMaps } from './GoogleMaps';
+import { LocationDropdown } from './ui/LocationDropdown';
 
 export interface Location {
   label: string;
@@ -154,26 +155,40 @@ export function StandorteUebersicht({
           </p>
         </div>
 
-        {/* Location Tabs */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8 pb-2">
-          {locations.map((location, index) => {
-            return (
-              <button
-                key={index}
-                ref={(el) => (tabsRef.current[index] = el!)}
-                onClick={() => handleTabChange(index)}
-                className={`location-tab flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 ${
-                  activeTab === index
-                    ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/25'
-                    : 'bg-background-card text-text border border-border hover:border-primary-300 hover:text-primary-600 hover:shadow-md'
-                }`}
-              >
-                <MapPin className={`w-4 h-4 ${activeTab === index ? 'text-white' : 'text-primary-500'}`} />
-                {location.label}
-              </button>
-            );
-          })}
-        </div>
+        {/* Location Selection - Only show if more than 1 location */}
+        {locations.length > 1 && (
+          <>
+            {/* Mobile Location Dropdown */}
+            <div className="md:hidden mb-8">
+              <LocationDropdown
+                options={locations.map((loc, idx) => ({ label: loc.label, value: idx }))}
+                value={activeTab}
+                onChange={handleTabChange}
+              />
+            </div>
+
+            {/* Desktop Location Tabs */}
+            <div className="hidden md:flex flex-wrap gap-2 justify-center mb-8 pb-2">
+              {locations.map((location, index) => {
+                return (
+                  <button
+                    key={index}
+                    ref={(el) => (tabsRef.current[index] = el!)}
+                    onClick={() => handleTabChange(index)}
+                    className={`location-tab flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 ${
+                      activeTab === index
+                        ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/25'
+                        : 'bg-background-card text-text border border-border hover:border-primary-300 hover:text-primary-600 hover:shadow-md'
+                    }`}
+                  >
+                    <MapPin className={`w-4 h-4 ${activeTab === index ? 'text-white' : 'text-primary-500'}`} />
+                    {location.label}
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
 
         {/* Info Cards Grid - CSS transitions for tab changes */}
         <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 transition-all duration-300 ${isTransitioning ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}>

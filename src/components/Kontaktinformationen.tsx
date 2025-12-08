@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useConfig } from '../config';
+import { LocationDropdown } from './ui/LocationDropdown';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -126,24 +127,37 @@ export function Kontaktinformationen() {
   return (
     <section ref={sectionRef} className="py-8 md:py-12 bg-background">
       <div className="max-w-6xl mx-auto px-4">
+        {/* Location Selection - Only show if more than 1 location */}
         {locations.length > 1 && (
-          <div className="flex flex-wrap gap-2 justify-center mb-8 p-1.5 bg-neutral-100 rounded-full w-fit mx-auto">
-            {locations.map((location, index) => (
-              <button
-                key={index}
-                ref={(el) => (tabsRef.current[index] = el!)}
-                onClick={() => handleTabChange(index)}
-                className={`location-tab flex items-center gap-2 px-5 py-2.5 font-medium rounded-full transition-all duration-300 ${
-                  activeTab === index
-                    ? 'text-white bg-primary-500 shadow-md'
-                    : 'text-text hover:text-primary-600 hover:bg-white/50'
-                }`}
-              >
-                <MapPin className={`w-4 h-4 ${activeTab === index ? 'text-white' : 'text-primary-500'}`} />
-                {location.label}
-              </button>
-            ))}
-          </div>
+          <>
+            {/* Mobile Location Dropdown */}
+            <div className="md:hidden mb-8">
+              <LocationDropdown
+                options={locations.map((loc, idx) => ({ label: loc.label, value: idx }))}
+                value={activeTab}
+                onChange={handleTabChange}
+              />
+            </div>
+
+            {/* Desktop Location Tabs */}
+            <div className="hidden md:flex flex-wrap gap-2 justify-center mb-8 p-1.5 bg-neutral-100 rounded-full w-fit mx-auto">
+              {locations.map((location, index) => (
+                <button
+                  key={index}
+                  ref={(el) => (tabsRef.current[index] = el!)}
+                  onClick={() => handleTabChange(index)}
+                  className={`location-tab flex items-center gap-2 px-5 py-2.5 font-medium rounded-full transition-all duration-300 ${
+                    activeTab === index
+                      ? 'text-white bg-primary-500 shadow-md'
+                      : 'text-text hover:text-primary-600 hover:bg-white/50'
+                  }`}
+                >
+                  <MapPin className={`w-4 h-4 ${activeTab === index ? 'text-white' : 'text-primary-500'}`} />
+                  {location.label}
+                </button>
+              ))}
+            </div>
+          </>
         )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
