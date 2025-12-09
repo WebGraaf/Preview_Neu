@@ -5,10 +5,37 @@ export interface FahrschuleKontakt {
   email: string;
 }
 
+export interface FahrschuleAdresse {
+  strasse: string;
+  hausnummer: string;
+  plz: string;
+  ort: string;
+  land?: string;
+}
+
 export interface Fahrschule {
   name: string;
   logo?: string;
+  inhaber?: string;
   kontakt: FahrschuleKontakt;
+  adresse?: FahrschuleAdresse;
+}
+
+// Datenschutz (Privacy Policy) configuration
+export interface Aufsichtsbehoerde {
+  name: string;
+  strasse: string;
+  plz: string;
+  ort: string;
+  telefon: string;
+  email: string;
+  website: string;
+}
+
+export interface DatenschutzConfig {
+  gueltigAb?: string;
+  letzteAktualisierung?: string;
+  zustaendigeAufsichtsbehoerde?: Aufsichtsbehoerde;
 }
 
 export interface Texte {
@@ -95,6 +122,7 @@ export interface FahrschuleConfig {
   texte?: Texte;
   standorte: Standort[];
   fuehrerscheinklassen: Fuehrerscheinklassen;
+  datenschutz?: DatenschutzConfig;
 }
 
 // Helper type for location display (used by components)

@@ -6,7 +6,26 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Datenschutz: React.FC = () => {
   const { config } = useConfig();
+  
+  // Fahrschule Grunddaten
   const fahrschuleName = config?.fahrschule?.name || 'Fahrschule';
+  const fahrschuleInhaber = config?.fahrschule?.inhaber || '[Inhaber/Gesellschafter]';
+  const fahrschuleEmail = config?.fahrschule?.kontakt?.email || '[E-Mail]';
+  const fahrschuleTelefon = config?.fahrschule?.kontakt?.telefon || '[Telefon]';
+  
+  // Adresse
+  const adresse = config?.fahrschule?.adresse;
+  const strasseHausnummer = adresse ? `${adresse.strasse} ${adresse.hausnummer}` : '[Straße Hausnummer]';
+  const plzOrt = adresse ? `${adresse.plz} ${adresse.ort}` : '[PLZ Ort]';
+  const land = adresse?.land || 'Deutschland';
+  const volleAnschrift = adresse ? `${strasseHausnummer}, ${plzOrt}` : '[Anschrift]';
+  
+  // Datenschutz-spezifische Daten
+  const datenschutz = config?.datenschutz;
+  const gueltigAb = datenschutz?.gueltigAb || '01.12.2025';
+  const letzteAktualisierung = datenschutz?.letzteAktualisierung || '01.12.2025';
+  const aufsichtsbehoerde = datenschutz?.zustaendigeAufsichtsbehoerde;
+  
   const { elementRef: headerRef, isVisible: headerVisible } = useScrollReveal();
 
   return (
@@ -33,7 +52,7 @@ const Datenschutz: React.FC = () => {
               Datenschutzerklärung
             </h1>
             <p className="text-lg md:text-xl text-text leading-relaxed">
-              Gültig ab: 01.12.2025
+              Gültig ab: {gueltigAb}
             </p>
           </div>
         </Container>
@@ -55,16 +74,16 @@ const Datenschutz: React.FC = () => {
                     Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) für diese Website ist:
                   </p>
                   <div className="space-y-1 text-lg mb-4">
-                    <p>[PLATZHALTER: FAHRSCHULE_NAME]</p>
-                    <p>[PLATZHALTER: FAHRSCHULE_STRASSE_HAUSNUMMER]</p>
-                    <p>[PLATZHALTER: FAHRSCHULE_PLZ_ORT]</p>
-                    <p>[PLATZHALTER: LAND]</p>
+                    <p>{fahrschuleName}</p>
+                    <p>{strasseHausnummer}</p>
+                    <p>{plzOrt}</p>
+                    <p>{land}</p>
                   </div>
                   <p className="text-lg mb-2">Vertreten durch:</p>
-                  <p className="text-lg mb-4">[PLATZHALTER: INHABER/GESELLSCHAFTER]</p>
+                  <p className="text-lg mb-4">{fahrschuleInhaber}</p>
                   <div className="space-y-1 text-lg">
-                    <p>E-Mail: [PLATZHALTER: FAHRSCHULE_EMAIL]</p>
-                    <p>Telefon: [PLATZHALTER: FAHRSCHULE_TELEFON]</p>
+                    <p>E-Mail: {fahrschuleEmail}</p>
+                    <p>Telefon: {fahrschuleTelefon}</p>
                   </div>
                   <p className="text-lg mt-4">
                     Sofern für unsere Fahrschule nach den gesetzlichen Vorgaben eine Pflicht zur Benennung eines Datenschutzbeauftragten besteht, finden Sie dessen Kontaktdaten in unserem Impressum oder in einer gesonderten Information auf dieser Website.
@@ -554,9 +573,9 @@ const Datenschutz: React.FC = () => {
                       </h3>
                       <p className="text-lg mb-2">Zur Ausübung Ihrer Rechte wenden Sie sich bitte an:</p>
                       <div className="space-y-1 text-lg mb-4">
-                        <p>[PLATZHALTER: FAHRSCHULE_NAME]</p>
-                        <p>E-Mail: [PLATZHALTER: FAHRSCHULE_EMAIL]</p>
-                        <p>Adresse: [PLATZHALTER: FAHRSCHULE_ANSCHRIFT]</p>
+                        <p>{fahrschuleName}</p>
+                        <p>E-Mail: {fahrschuleEmail}</p>
+                        <p>Adresse: {volleAnschrift}</p>
                       </div>
                       <p className="text-lg mb-4">
                         Unser technischer Dienstleister (GbR) ist als Auftragsverarbeiter nicht primärer Ansprechpartner für Betroffenenrechte. Sie können sich jedoch auch an info@deine-fahrschul-website.de wenden; das Anliegen wird dann an die jeweils zuständige Fahrschule weitergeleitet.
@@ -659,14 +678,14 @@ const Datenschutz: React.FC = () => {
                         Bei Fragen zur Verarbeitung Ihrer personenbezogenen Daten oder zur Ausübung Ihrer Rechte wenden Sie sich bitte an:
                       </p>
                       <div className="space-y-1 text-lg mb-4">
-                        <p>[PLATZHALTER: FAHRSCHULE_NAME]</p>
-                        <p>[PLATZHALTER: FAHRSCHULE_STRASSE_HAUSNUMMER]</p>
-                        <p>[PLATZHALTER: FAHRSCHULE_PLZ_ORT]</p>
-                        <p>[PLATZHALTER: LAND]</p>
+                        <p>{fahrschuleName}</p>
+                        <p>{strasseHausnummer}</p>
+                        <p>{plzOrt}</p>
+                        <p>{land}</p>
                       </div>
                       <div className="space-y-1 text-lg">
-                        <p>E-Mail: [PLATZHALTER: FAHRSCHULE_EMAIL]</p>
-                        <p>Telefon: [PLATZHALTER: FAHRSCHULE_TELEFON]</p>
+                        <p>E-Mail: {fahrschuleEmail}</p>
+                        <p>Telefon: {fahrschuleTelefon}</p>
                       </div>
                     </div>
 
@@ -675,17 +694,17 @@ const Datenschutz: React.FC = () => {
                         11.2 Zuständige Aufsichtsbehörde
                       </h3>
                       <p className="text-lg mb-4">
-                        Die für uns zuständige Datenschutzaufsichtsbehörde richtet sich nach dem Sitz unserer Fahrschule. In Deutschland sind dies die jeweiligen Landesdatenschutzbehörden. Für Fahrschulen mit Sitz in Nordrhein-Westfalen ist z. B. zuständig:
+                        Die für uns zuständige Datenschutzaufsichtsbehörde richtet sich nach dem Sitz unserer Fahrschule. In Deutschland sind dies die jeweiligen Landesdatenschutzbehörden. Zuständig ist:
                       </p>
                       <div className="space-y-1 text-lg mb-4">
-                        <p className="font-medium">Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW)</p>
-                        <p>Kavalleriestraße 8–10</p>
-                        <p>40213 Düsseldorf</p>
+                        <p className="font-medium">{aufsichtsbehoerde?.name || 'Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW)'}</p>
+                        <p>{aufsichtsbehoerde?.strasse || 'Kavalleriestraße 8–10'}</p>
+                        <p>{aufsichtsbehoerde?.plz || '40213'} {aufsichtsbehoerde?.ort || 'Düsseldorf'}</p>
                       </div>
                       <div className="space-y-1 text-lg">
-                        <p>Telefon: +49 (0) 211 38424-0</p>
-                        <p>E-Mail: poststelle@ldi.nrw.de</p>
-                        <p>Website: https://www.ldi.nrw.de</p>
+                        <p>Telefon: {aufsichtsbehoerde?.telefon || '+49 (0) 211 38424-0'}</p>
+                        <p>E-Mail: {aufsichtsbehoerde?.email || 'poststelle@ldi.nrw.de'}</p>
+                        <p>Website: {aufsichtsbehoerde?.website || 'https://www.ldi.nrw.de'}</p>
                       </div>
                     </div>
                   </div>
@@ -703,7 +722,7 @@ const Datenschutz: React.FC = () => {
                     Die jeweils aktuelle Fassung ist jederzeit auf dieser Website abrufbar.
                   </p>
                   <p className="text-lg font-medium">
-                    Letzte Aktualisierung: 01.12.2025
+                    Letzte Aktualisierung: {letzteAktualisierung}
                   </p>
                 </div>
 
@@ -723,7 +742,7 @@ const Datenschutz: React.FC = () => {
                       <tbody className="divide-y divide-border-divider">
                         <tr>
                           <td className="py-3 pr-4 align-top font-medium">Verantwortlich</td>
-                          <td className="py-3">[PLATZHALTER: FAHRSCHULE_NAME] (Fahrschule) als Verantwortliche im Sinne der DSGVO. Technische Bereitstellung der Website und Formularverarbeitung im Auftrag durch Handgraaf, Luca & Leineweber, Kai GbR.</td>
+                          <td className="py-3">{fahrschuleName} (Fahrschule) als Verantwortliche im Sinne der DSGVO. Technische Bereitstellung der Website und Formularverarbeitung im Auftrag durch Handgraaf, Luca & Leineweber, Kai GbR.</td>
                         </tr>
                         <tr>
                           <td className="py-3 pr-4 align-top font-medium">Datenarten</td>
@@ -735,7 +754,7 @@ const Datenschutz: React.FC = () => {
                         </tr>
                         <tr>
                           <td className="py-3 pr-4 align-top font-medium">Empfänger</td>
-                          <td className="py-3">Verantwortliche Fahrschule [PLATZHALTER: FAHRSCHULE_NAME]; technische Dienstleister (GbR als Auftragsverarbeiter, Vercel als Hosting-Anbieter, Hostinger für E-Mail); ggf. Google (bei Einbindung von Google Maps und erteilter Einwilligung).</td>
+                          <td className="py-3">Verantwortliche Fahrschule {fahrschuleName}; technische Dienstleister (GbR als Auftragsverarbeiter, Vercel als Hosting-Anbieter, Hostinger für E-Mail); ggf. Google (bei Einbindung von Google Maps und erteilter Einwilligung).</td>
                         </tr>
                         <tr>
                           <td className="py-3 pr-4 align-top font-medium">Rechtsgrundlagen</td>
@@ -751,7 +770,7 @@ const Datenschutz: React.FC = () => {
                         </tr>
                         <tr>
                           <td className="py-3 pr-4 align-top font-medium">Kontakt</td>
-                          <td className="py-3">[PLATZHALTER: FAHRSCHULE_EMAIL] (Fahrschule); zusätzlich info@deine-fahrschul-website.de für technische Rückfragen (Weiterleitung an die zuständige Fahrschule).</td>
+                          <td className="py-3">{fahrschuleEmail} (Fahrschule); zusätzlich info@deine-fahrschul-website.de für technische Rückfragen (Weiterleitung an die zuständige Fahrschule).</td>
                         </tr>
                       </tbody>
                     </table>
@@ -761,7 +780,7 @@ const Datenschutz: React.FC = () => {
                 {/* Copyright */}
                 <div className="pt-4">
                   <p className="text-sm text-text">
-                    © 2025 [PLATZHALTER: FAHRSCHULE_NAME] – Alle Rechte vorbehalten
+                    © {new Date().getFullYear()} {fahrschuleName} – Alle Rechte vorbehalten
                   </p>
                 </div>
               </div>

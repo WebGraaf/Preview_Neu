@@ -2,9 +2,30 @@
   "fahrschule": {
     "name": "Platzhalter Fahrschule",
     "logo": "/default_images/logo_default.webp",
+    "inhaber": "Max Mustermann",
     "kontakt": {
       "telefon": "0123 456789",
       "email": "info@fuehrerschein.de"
+    },
+    "adresse": {
+      "strasse": "Musterstraße",
+      "hausnummer": "123",
+      "plz": "12345",
+      "ort": "Musterstadt",
+      "land": "Deutschland"
+    }
+  },
+  "datenschutz": {
+    "gueltigAb": "01.12.2025",
+    "letzteAktualisierung": "01.12.2025",
+    "zustaendigeAufsichtsbehoerde": {
+      "name": "Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW)",
+      "strasse": "Kavalleriestraße 8–10",
+      "plz": "40213",
+      "ort": "Düsseldorf",
+      "telefon": "+49 (0) 211 38424-0",
+      "email": "poststelle@ldi.nrw.de",
+      "website": "https://www.ldi.nrw.de"
     }
   },
   "texte": {

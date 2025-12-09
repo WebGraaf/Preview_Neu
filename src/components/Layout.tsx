@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ConsentBanner } from './ConsentBanner';
 import { ConsentSettings } from './ConsentSettings';
+import SchemaMarkup from './SchemaMarkup';
 
 interface ContainerProps {
   children: React.ReactNode;
@@ -81,6 +82,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
+      <SchemaMarkup />
       <Header />
       <main className="flex-grow">{children}</main>
       <footer className="relative bg-gradient-to-b from-neutral-800 to-neutral-900 text-white pt-12 md:pt-14 lg:pt-16 pb-6 md:pb-8">
