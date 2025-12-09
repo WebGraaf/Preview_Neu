@@ -50,7 +50,7 @@ export const KlassenDetailCard: React.FC<KlassenDetailCardProps> = ({
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-full object-cover"
             loading="lazy"
           />
           {/* Subtle overlay gradient */}
@@ -80,7 +80,7 @@ export const KlassenDetailCard: React.FC<KlassenDetailCardProps> = ({
           >
             <span>Jetzt zur Klasse {title.split(' ')[1]} anmelden</span>
             <svg
-              className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"
+              className="w-4 h-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

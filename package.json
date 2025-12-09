@@ -13,7 +13,6 @@
   "dependencies": {
     "@radix-ui/react-switch": "^1.2.6",
     "@react-spring/web": "^10.0.3",
-    "@supabase/supabase-js": "^2.57.4",
     "@types/nodemailer": "^7.0.4",
     "@vercel/node": "^5.5.13",
     "class-variance-authority": "^0.7.1",

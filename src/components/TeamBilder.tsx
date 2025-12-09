@@ -88,20 +88,20 @@ export const TeamBilder: React.FC<TeamBilderProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`flex flex-col md:flex-row gap-6 md:gap-8 justify-center will-change-transform ${className}`}
+      className={`flex flex-col md:flex-row gap-6 md:gap-8 justify-center ${className}`}
     >
       {teams.slice(0, 2).map((team, index) => (
         <div
           key={index}
           ref={(el) => (cardRefs.current[index] = el)}
-          className={`md:w-1/2 rounded-2xl overflow-hidden ${variantClasses[variant]} max-w-sm mx-auto md:mx-0 cursor-pointer shadow-lg transition-all duration-300 ease-out will-change-transform hover:-translate-y-2 hover:shadow-2xl group`}
+          className={`md:w-1/2 rounded-2xl overflow-hidden ${variantClasses[variant]} max-w-sm mx-auto md:mx-0 cursor-pointer shadow-lg transition-shadow duration-300 ease-out hover:shadow-2xl group`}
         >
           <div className="grid grid-rows-[2fr_1fr] gap-0">
             <div className="h-full overflow-hidden relative">
               <img
                 src={team.imageSrc}
                 alt={team.imageAlt || ''}
-                className="w-full h-full object-cover aspect-[2/3] transition-transform duration-500 ease-out group-hover:scale-105"
+                className="w-full h-full object-cover aspect-[2/3]"
                 loading="lazy"
               />
               {/* Hover overlay with name */}

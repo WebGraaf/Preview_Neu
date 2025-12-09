@@ -129,7 +129,7 @@ const Home: React.FC = () => {
       )}
 
       {/* CTA Banner */}
-      <section className="py-6 md:py-8 overflow-hidden bg-background">
+      <section className="py-6 md:py-8 bg-background">
         <BannerAnmelden />
       </section>
 
@@ -168,7 +168,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Final CTA Banner */}
-      <section className="py-6 md:py-8 overflow-hidden bg-background">
+      <section className="py-6 md:py-8 bg-background">
         <BannerAnmelden />
       </section>
     </div>

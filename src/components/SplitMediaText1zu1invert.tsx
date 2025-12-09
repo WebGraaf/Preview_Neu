@@ -93,7 +93,7 @@ export const SplitMediaText1zu1invert: React.FC<SplitMediaText1zu1invertProps> =
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="w-full h-full object-cover rounded-t-2xl md:rounded-t-none md:rounded-r-2xl shadow-lg transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl"
+            className="w-full h-full object-cover rounded-t-2xl md:rounded-t-none md:rounded-r-2xl shadow-lg transition-shadow duration-500 group-hover:shadow-xl"
             loading="lazy"
           />
         </div>

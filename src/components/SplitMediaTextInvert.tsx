@@ -95,7 +95,7 @@ export const SplitMediaTextInvert: React.FC<SplitMediaTextInvertProps> = ({
   };
 
   return (
-    <section ref={containerRef} className="py-6 md:py-8 bg-background will-change-transform">
+    <section ref={containerRef} className="py-6 md:py-8 bg-background">
       <div
         className={`rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${variantClasses[variant]} ${className}`}
       >
@@ -104,15 +104,15 @@ export const SplitMediaTextInvert: React.FC<SplitMediaTextInvertProps> = ({
             imagePosition === 'right' ? 'md:flex-row-reverse' : ''
           }`}
         >
-          <div ref={imageRef} className="md:w-1/2 group overflow-hidden will-change-transform">
+          <div ref={imageRef} className="md:w-1/2 group overflow-hidden">
             <img
               src={imageSrc}
               alt={imageAlt}
-              className="w-full h-full object-cover rounded-t-2xl md:rounded-t-none md:rounded-r-2xl shadow-lg transition-transform duration-500 ease-out group-hover:scale-105"
+              className="w-full h-full object-cover rounded-t-2xl md:rounded-t-none md:rounded-r-2xl shadow-lg"
               loading="lazy"
             />
           </div>
-          <div ref={textRef} className="md:w-1/2 flex flex-col justify-center p-6 md:p-10 lg:p-12 text-left space-y-4 will-change-transform">
+          <div ref={textRef} className="md:w-1/2 flex flex-col justify-center p-6 md:p-10 lg:p-12 text-left space-y-4">
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 leading-tight">{title}</h3>
             <p className="text-neutral-600 leading-relaxed text-base md:text-lg">{description}</p>
           </div>

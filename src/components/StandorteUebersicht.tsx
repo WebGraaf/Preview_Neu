@@ -191,13 +191,13 @@ export function StandorteUebersicht({
         )}
 
         {/* Info Cards Grid - CSS transitions for tab changes */}
-        <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 transition-all duration-300 ${isTransitioning ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 transition-opacity duration-300 ease-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
           <div
             ref={(el) => el && (infoCardsRef.current[0] = el)}
-            className="info-card group bg-background-card backdrop-blur-sm rounded-2xl p-5 md:p-6 border border-border hover:border-primary-200 hover:shadow-lg transition-all duration-300 will-change-transform"
+            className="info-card group bg-background-card rounded-2xl p-5 md:p-6 border border-border hover:border-primary-200 hover:shadow-lg transition-shadow duration-300"
           >
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-primary-100 flex items-center justify-center group-hover:bg-primary-200 group-hover:scale-110 transition-all duration-300">
+              <div className="w-10 h-10 rounded-xl bg-primary-100 flex items-center justify-center group-hover:bg-primary-200 transition-colors duration-300">
                 <MapPin className="w-5 h-5 text-primary-600" />
               </div>
               <h4 className="font-bold text-heading text-lg">Adresse</h4>
@@ -214,10 +214,10 @@ export function StandorteUebersicht({
           
           <div
             ref={(el) => el && (infoCardsRef.current[1] = el)}
-            className="info-card group bg-background-card backdrop-blur-sm rounded-2xl p-5 md:p-6 border border-border hover:border-primary-200 hover:shadow-lg transition-all duration-300 will-change-transform"
+            className="info-card group bg-background-card rounded-2xl p-5 md:p-6 border border-border hover:border-primary-200 hover:shadow-lg transition-shadow duration-300"
           >
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-primary-100 flex items-center justify-center group-hover:bg-primary-200 group-hover:scale-110 transition-all duration-300">
+              <div className="w-10 h-10 rounded-xl bg-primary-100 flex items-center justify-center group-hover:bg-primary-200 transition-colors duration-300">
                 <Phone className="w-5 h-5 text-primary-600" />
               </div>
               <h4 className="font-bold text-heading text-lg">Telefon</h4>
@@ -232,10 +232,10 @@ export function StandorteUebersicht({
           
           <div
             ref={(el) => el && (infoCardsRef.current[2] = el)}
-            className="info-card group bg-background-card backdrop-blur-sm rounded-2xl p-5 md:p-6 border border-border hover:border-primary-200 hover:shadow-lg transition-all duration-300 will-change-transform"
+            className="info-card group bg-background-card rounded-2xl p-5 md:p-6 border border-border hover:border-primary-200 hover:shadow-lg transition-shadow duration-300"
           >
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-primary-100 flex items-center justify-center group-hover:bg-primary-200 group-hover:scale-110 transition-all duration-300">
+              <div className="w-10 h-10 rounded-xl bg-primary-100 flex items-center justify-center group-hover:bg-primary-200 transition-colors duration-300">
                 <Clock className="w-5 h-5 text-primary-600" />
               </div>
               <h4 className="font-bold text-heading text-lg">Öffnungszeiten</h4>
@@ -245,7 +245,7 @@ export function StandorteUebersicht({
         </div>
 
         {/* Google Maps Integration - CSS transitions for tab changes */}
-        <div ref={mapRef} className={`map-container bg-background-card rounded-2xl shadow-xl overflow-hidden border border-border will-change-transform transition-all duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+        <div ref={mapRef} className={`map-container bg-background-card rounded-2xl shadow-xl overflow-hidden border border-border transition-opacity duration-300 ease-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
           <GoogleMaps
             src={locations[activeTab].mapSrc}
             height="400px"

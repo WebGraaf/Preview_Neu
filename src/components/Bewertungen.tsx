@@ -100,16 +100,16 @@ const Bewertungen: React.FC<BewertungenProps> = ({
   return (
     <section ref={sectionRef} className="py-8 md:py-12 bg-background">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-xl">
-        <h2 className="reviews-title text-3xl font-bold text-heading mb-8 text-center will-change-transform">{title}</h2>
+        <h2 className="reviews-title text-3xl font-bold text-heading mb-8 text-center">{title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
               ref={(el) => (testimonialRefs.current[index] = el!)}
-              className="testimonial-card border-2 border-neutral-200 rounded-2xl p-6 bg-background-card shadow-md will-change-transform transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:border-primary-200 group"
+              className="testimonial-card border-2 border-neutral-200 rounded-2xl p-6 bg-background-card shadow-md transition-shadow duration-300 ease-out hover:shadow-xl hover:border-primary-200 group"
             >
               <div className="flex items-center mb-4">
-                <div className="testimonial-avatar w-12 h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold mr-4 shadow-md transition-transform duration-300 ease-out group-hover:scale-110">
+                <div className="testimonial-avatar w-12 h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold mr-4 shadow-md">
                   {testimonial.initials}
                 </div>
                 <div>
@@ -121,7 +121,7 @@ const Bewertungen: React.FC<BewertungenProps> = ({
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`star-icon w-5 h-5 transition-transform duration-200 ease-out group-hover:scale-110 ${
+                    className={`star-icon w-5 h-5 ${
                       i < testimonial.rating
                         ? 'text-amber-400 fill-amber-400 drop-shadow-sm'
                         : 'text-neutral-200 fill-neutral-200'

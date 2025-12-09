@@ -31,30 +31,69 @@ const SplitMediaTextCopy: React.FC<{
   className = '',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(containerRef.current,
-        {
-          opacity: 0,
-          y: 60,
-        },
+    const container = containerRef.current;
+    const image = imageRef.current;
+    const text = textRef.current;
+
+    if (!container) return;
+
+    // Create single consolidated timeline with ScrollTrigger
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    });
+
+    // Container fade in
+    tl.fromTo(
+      container,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+    );
+
+    // Image slide in - reduced distance for better performance
+    if (image) {
+      const imageX = imagePosition === 'left' ? -60 : 60;
+      tl.fromTo(
+        image,
+        { opacity: 0, x: imageX },
+        { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' },
+        '-=0.4'
+      );
+    }
+
+    // Text content staggered reveal
+    if (text?.children) {
+      tl.fromTo(
+        text.children,
+        { opacity: 0, y: 20 },
         {
           opacity: 1,
           y: 0,
-          duration: 1.0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-          }
-        }
+          duration: 0.5,
+          stagger: 0.15,
+          ease: 'power2.out',
+        },
+        '-=0.3'
       );
-    });
+    }
 
-    return () => ctx.revert();
-  }, []);
+    // Cleanup function
+    return () => {
+      tl.kill();
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars.trigger === container) {
+          trigger.kill();
+        }
+      });
+    };
+  }, [imagePosition]);
 
   const variantClasses = {
     default: 'bg-background-card border border-border',
@@ -63,30 +102,30 @@ const SplitMediaTextCopy: React.FC<{
   };
 
   return (
-    <div
-      ref={containerRef}
-      className={`rounded-xl overflow-hidden py-0 px-0 ${variantClasses[variant]} ${className}`}
-      style={{ willChange: 'transform, opacity' }}
-    >
+    <section ref={containerRef} className="py-6 md:py-8 bg-background">
       <div
-        className={`flex flex-col md:flex-row gap-8 ${
-          imagePosition === 'right' ? 'md:flex-row-reverse' : ''
-        }`}
+        className={`rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${variantClasses[variant]} ${className}`}
       >
-        <div className="md:w-1/2">
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div className="md:w-1/2 flex flex-col justify-center p-8 text-left">
-          <h3 className="text-3xl font-bold text-heading mb-4">{title}</h3>
-          <p className="text-text leading-relaxed">{description}</p>
+        <div
+          className={`flex flex-col md:flex-row gap-0 md:gap-8 items-stretch ${
+            imagePosition === 'right' ? 'md:flex-row-reverse' : ''
+          }`}
+        >
+          <div ref={imageRef} className="md:w-1/2 group overflow-hidden">
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="w-full h-full object-cover rounded-t-2xl md:rounded-t-none md:rounded-l-2xl shadow-lg"
+              loading="lazy"
+            />
+          </div>
+          <div ref={textRef} className="md:w-1/2 flex flex-col justify-center p-6 md:p-10 lg:p-12 text-left space-y-4">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 leading-tight">{title}</h3>
+            <p className="text-neutral-600 leading-relaxed text-base md:text-lg">{description}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
@@ -94,6 +133,7 @@ const UeberUns: React.FC = () => {
   const { config, bilderConfig } = useConfig();
   const { elementRef: headerRef, isVisible: headerVisible } = useScrollReveal();
   const { elementRef: teamHeaderRef, isVisible: teamHeaderVisible } = useScrollReveal();
+  const { elementRef: ctaRef, isVisible: ctaVisible } = useScrollReveal();
 
   // Get intro text from config with fallback
   const ueberUnsIntro = config?.texte?.ueberUnsIntro || 'Seit über 20 Jahren sind wir deine Fahrschule des Vertrauens. Mit viel Herz, Erfahrung und modernster Ausstattung begleiten wir dich auf deinem Weg zum Führerschein.\n\nUnser Ziel ist es nicht nur, dir das Fahren beizubringen, sondern dich zu einem sicheren und verantwortungsvollen Verkehrsteilnehmer zu machen.';
@@ -233,7 +273,15 @@ const UeberUns: React.FC = () => {
       {/* CTA Section */}
       <section className="py-8 md:py-12 bg-background">
         <Container>
-          <div className="relative bg-gradient-to-br from-background-card to-background-tint rounded-2xl p-8 md:p-12 lg:p-16 border border-border shadow-lg text-center max-w-4xl mx-auto overflow-hidden">
+          <div
+            ref={ctaRef as React.RefObject<HTMLDivElement>}
+            className="relative bg-gradient-to-br from-background-card to-background-tint rounded-2xl p-8 md:p-12 lg:p-16 border border-border shadow-lg text-center max-w-4xl mx-auto overflow-hidden"
+            style={{
+              opacity: ctaVisible ? 1 : 0,
+              transform: ctaVisible ? 'translateY(0)' : 'translateY(30px)',
+              transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
+            }}
+          >
             {/* Decorative elements */}
             <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-primary-100 to-transparent rounded-br-full opacity-50"></div>
             <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-primary-100 to-transparent rounded-tl-full opacity-50"></div>
@@ -246,7 +294,7 @@ const UeberUns: React.FC = () => {
             </p>
             <a
               href="/anmelden"
-              className="relative inline-block bg-primary text-primary-foreground px-8 py-4 rounded-xl font-semibold hover:bg-primary-600 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shadow-lg"
+              className="relative inline-block bg-primary text-primary-foreground px-8 py-4 rounded-xl font-semibold hover:bg-primary-600 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out shadow-lg"
             >
               Jetzt anmelden
             </a>

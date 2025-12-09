@@ -87,12 +87,11 @@ export const OverlayMediaText: React.FC<OverlayMediaTextProps> = ({
     <div
       ref={containerRef}
       className={`relative rounded-2xl overflow-hidden min-h-[350px] md:min-h-[400px] py-8 md:py-10 px-4 shadow-xl hover:shadow-2xl transition-shadow duration-300 group bg-background ${className}`}
-      style={{ willChange: 'transform, opacity' }}
     >
       <img
         src={imageSrc}
         alt={imageAlt}
-        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${
+        className={`absolute inset-0 w-full h-full object-cover ${
           variant === 'blur' ? 'filter blur-sm' : ''
         }`}
         loading="lazy"
@@ -105,8 +104,8 @@ export const OverlayMediaText: React.FC<OverlayMediaTextProps> = ({
       {/* Subtle animated overlay on hover */}
       <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <div className={`relative z-10 h-full flex flex-col ${positionClasses[textPosition]} px-6 md:px-12`}>
-        <h3 className="overlay-title text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 max-w-3xl mx-auto text-center drop-shadow-lg [text-shadow:_0_2px_10px_rgb(0_0_0_/_40%)]" style={{ willChange: 'transform, opacity' }}>{title}</h3>
-        <p className="overlay-description text-white/95 text-base md:text-lg lg:text-xl max-w-2xl mx-auto text-center leading-relaxed drop-shadow-md [text-shadow:_0_1px_5px_rgb(0_0_0_/_30%)]" style={{ willChange: 'transform, opacity' }}>{description}</p>
+        <h3 className="overlay-title text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 max-w-3xl mx-auto text-center drop-shadow-lg [text-shadow:_0_2px_10px_rgb(0_0_0_/_40%)]">{title}</h3>
+        <p className="overlay-description text-white/95 text-base md:text-lg lg:text-xl max-w-2xl mx-auto text-center leading-relaxed drop-shadow-md [text-shadow:_0_1px_5px_rgb(0_0_0_/_30%)]">{description}</p>
       </div>
     </div>
   );

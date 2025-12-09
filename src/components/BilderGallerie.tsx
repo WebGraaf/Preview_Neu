@@ -163,17 +163,17 @@ export const BilderGallerie: React.FC<BilderGallerieProps> = ({
             key={index}
             ref={(el) => (galleryItemsRef.current[index] = el!)}
             onClick={() => openLightbox(index)}
-            className="gallery-item relative aspect-square overflow-hidden rounded-2xl group cursor-pointer bg-gray-100 shadow-md will-change-transform transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]"
+            className="gallery-item relative aspect-square overflow-hidden rounded-2xl group cursor-pointer bg-gray-100 shadow-md transition-opacity transition-shadow duration-300 ease-out hover:shadow-xl hover:-translate-y-1"
           >
             <img
               src={image}
               alt={`Gallery image ${index + 1}`}
-              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+              className="w-full h-full object-cover"
               loading="lazy"
             />
             <div className="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <ZoomIn className="zoom-icon w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out group-hover:scale-110 drop-shadow-lg" />
+              <ZoomIn className="zoom-icon w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out drop-shadow-lg" />
             </div>
           </button>
         ))}
