@@ -24,60 +24,64 @@ export const TeamBilder: React.FC<TeamBilderProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const hasAnimatedRef = useRef(false);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
     const cards = cardRefs.current.filter(Boolean);
     
-    if (!container) return;
+    if (!container || hasAnimatedRef.current) return;
 
-    // Create single consolidated timeline with ScrollTrigger
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    });
+    // Set initial state
+    gsap.set(container, { opacity: 0, y: 40 });
+    gsap.set(cards, { opacity: 0, y: 40 });
 
-    // Container fade in
-    tl.fromTo(
-      container,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power2.out',
-      }
-    );
+    // Create ScrollTrigger that fires once
+    scrollTriggerRef.current = ScrollTrigger.create({
+      trigger: container,
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        if (hasAnimatedRef.current) return;
+        hasAnimatedRef.current = true;
 
-    // Staggered card reveals - removed 3D rotationY and scale for better performance
-    if (cards.length > 0) {
-      tl.fromTo(
-        cards,
-        { opacity: 0, y: 40 },
-        {
+        // Create timeline for animation
+        const tl = gsap.timeline();
+
+        // Container fade in
+        tl.to(container, {
           opacity: 1,
           y: 0,
           duration: 0.6,
-          stagger: 0.2,
-          ease: 'power3.out',
-        },
-        '-=0.3'
-      );
-    }
+          ease: 'power2.out',
+        });
 
-    // Cleanup function - hover effects now handled by CSS
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.trigger === container) {
-          trigger.kill();
+        // Staggered card reveals
+        if (cards.length > 0) {
+          tl.to(
+            cards,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.2,
+              ease: 'power3.out',
+            },
+            '-=0.3'
+          );
         }
-      });
+      },
+    });
+
+    // Cleanup function
+    return () => {
+      if (scrollTriggerRef.current) {
+        scrollTriggerRef.current.kill();
+        scrollTriggerRef.current = null;
+      }
     };
-  }, [teams]);
+  }, []);
 
   const variantClasses = {
     default: 'bg-background-card border border-border',
