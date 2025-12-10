@@ -21,12 +21,14 @@ const BannerAnmelden: React.FC = () => {
           scale: 0.5,
           rotation: -45,
           y: 50,
+          x: 0,
         },
         {
           opacity: 1,
           scale: 1,
           rotation: 0,
           y: 0,
+          x: 0,
           duration: 1,
           delay: 0.3,
           ease: "power2.out",
@@ -75,7 +77,7 @@ const BannerAnmelden: React.FC = () => {
                 </Link>
               </div>
             </div>
-            <div className="flex-shrink-0 lg:w-3/10 flex justify-center" style={{ opacity: 1 }}>
+            <div className="flex-shrink-0 lg:w-3/10 flex justify-center lg:justify-end" style={{ opacity: 1 }}>
               <img
                 ref={logoRef}
                 src={LogoDefault}
