@@ -55,7 +55,7 @@ export const ConsentBanner = ({ isVisible, onAccept, onDecline, onOpenSettings }
           </div>
 
           {/* Compact buttons - GDPR compliant: equal visual weight */}
-          <div className="flex gap-2 mt-4">
+          <div className="flex flex-col xs:flex-row gap-2 mt-4">
             <button
               onClick={onDecline}
               className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold
