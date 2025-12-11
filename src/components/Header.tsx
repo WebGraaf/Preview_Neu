@@ -78,8 +78,8 @@ const Header: React.FC = () => {
   if (loading) {
     return (
       <header className="fixed top-0 left-0 right-0 z-50 px-[5%] md:px-[10%] pt-1 md:pt-2">
-        <div className="bg-primary-600 rounded-xl shadow-lg py-2 px-4">
-          <div className="text-center text-white">Laden...</div>
+        <div className="bg-white rounded-xl shadow-lg py-2 px-4">
+          <div className="text-center text-primary-600">Laden...</div>
         </div>
       </header>
     );
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
         }`}
       >
         <div
-          className={`bg-primary-600 rounded-xl transition-all duration-300 ${
+          className={`bg-white rounded-xl transition-all duration-300 ${
             isScrolled ? 'shadow-2xl' : 'shadow-lg'
           }`}
         >
@@ -118,7 +118,7 @@ const Header: React.FC = () => {
                 {phoneNumber && (
                   <a
                     href={`tel:${phoneNumber.replace(/\s/g, '')}`}
-                    className="hidden lg:flex items-center gap-2 text-white/90 hover:text-white font-medium transition-colors"
+                    className="hidden lg:flex items-center gap-2 text-primary-600 hover:text-primary-700 font-medium transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -132,7 +132,7 @@ const Header: React.FC = () => {
               {phoneNumber && (
                 <a
                   href={`tel:${phoneNumber.replace(/\s/g, '')}`}
-                  className="lg:hidden flex items-center gap-1.5 text-white/90 hover:text-white text-sm font-medium transition-colors"
+                  className="lg:hidden flex items-center gap-1.5 text-primary-600 hover:text-primary-700 text-sm font-medium transition-colors"
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -146,12 +146,12 @@ const Header: React.FC = () => {
                 <Link
                   to="/"
                   className={`relative py-1.5 transition-all duration-200 font-bold group ${
-                    location.pathname === '/' ? 'text-white' : 'text-white/80 hover:text-white'
+                    location.pathname === '/' ? 'text-primary-600' : 'text-primary-600/80 hover:text-primary-600'
                   }`}
                   onClick={closeMenus}
                 >
                   Home
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform duration-300 origin-left ${
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-primary-600 transform transition-transform duration-300 origin-left ${
                     location.pathname === '/' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                   }`} />
                 </Link>
@@ -159,12 +159,12 @@ const Header: React.FC = () => {
                 <Link
                   to="/ueber-uns"
                   className={`relative py-1.5 transition-all duration-200 font-bold group ${
-                    location.pathname === '/ueber-uns' ? 'text-white' : 'text-white/80 hover:text-white'
+                    location.pathname === '/ueber-uns' ? 'text-primary-600' : 'text-primary-600/80 hover:text-primary-600'
                   }`}
                   onClick={closeMenus}
                 >
                   Über Uns
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform duration-300 origin-left ${
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-primary-600 transform transition-transform duration-300 origin-left ${
                     location.pathname === '/ueber-uns' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                   }`} />
                 </Link>
@@ -175,8 +175,8 @@ const Header: React.FC = () => {
                     onClick={toggleDropdown}
                     className={`relative py-1.5 transition-all duration-200 flex items-center font-bold group ${
                       location.pathname.startsWith('/fuehrerscheine') || location.pathname.startsWith('/klasse-')
-                        ? 'text-white'
-                        : 'text-white/80 hover:text-white'
+                        ? 'text-primary-600'
+                        : 'text-primary-600/80 hover:text-primary-600'
                     }`}
                   >
                     Führerscheine
@@ -188,7 +188,7 @@ const Header: React.FC = () => {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
-                    <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform duration-300 origin-left ${
+                    <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-primary-600 transform transition-transform duration-300 origin-left ${
                       location.pathname.startsWith('/fuehrerscheine') || location.pathname.startsWith('/klasse-')
                         ? 'scale-x-100'
                         : 'scale-x-0 group-hover:scale-x-100'
@@ -197,7 +197,7 @@ const Header: React.FC = () => {
                   
                   {/* Dropdown Menu */}
                   <div
-                    className={`absolute top-full right-0 mt-2 w-56 bg-primary-700/95 backdrop-blur-md border border-primary-500/30 rounded-xl shadow-2xl z-10 transition-all duration-300 ease-out origin-top ${
+                    className={`absolute top-full right-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-2xl z-10 transition-all duration-300 ease-out origin-top ${
                       isDropdownOpen
                         ? 'opacity-100 visible scale-100 translate-y-0'
                         : 'opacity-0 invisible scale-95 -translate-y-2'
@@ -205,17 +205,17 @@ const Header: React.FC = () => {
                   >
                     <Link
                       to="/fuehrerscheine"
-                      className="block px-4 py-2.5 text-white hover:bg-primary-600/50 rounded-t-xl transition-all duration-200"
+                      className="block px-4 py-2.5 text-primary-600 hover:bg-primary-50 rounded-t-xl transition-all duration-200"
                       onClick={closeMenus}
                     >
                       Übersicht
                     </Link>
-                    <div className="border-t border-primary-500/30 mx-3" />
+                    <div className="border-t border-gray-200 mx-3" />
                     {fuehrerscheineSubpages.map((page, index) => (
                       <Link
                         key={page.path}
                         to={page.path}
-                        className={`block px-4 py-2.5 text-white hover:bg-primary-600/50 transition-all duration-200 ${
+                        className={`block px-4 py-2.5 text-primary-600 hover:bg-primary-50 transition-all duration-200 ${
                           index === fuehrerscheineSubpages.length - 1 ? 'rounded-b-xl' : ''
                         }`}
                         onClick={closeMenus}
@@ -229,12 +229,12 @@ const Header: React.FC = () => {
                 <Link
                   to="/kontakt"
                   className={`relative py-1.5 transition-all duration-200 font-bold group ${
-                    location.pathname === '/kontakt' ? 'text-white' : 'text-white/80 hover:text-white'
+                    location.pathname === '/kontakt' ? 'text-primary-600' : 'text-primary-600/80 hover:text-primary-600'
                   }`}
                   onClick={closeMenus}
                 >
                   Kontakt
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-white transform transition-transform duration-300 origin-left ${
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-primary-600 transform transition-transform duration-300 origin-left ${
                     location.pathname === '/kontakt' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                   }`} />
                 </Link>
@@ -242,7 +242,7 @@ const Header: React.FC = () => {
                 {/* CTA Button - stands out with contrasting colors */}
                 <Link
                   to="/anmelden"
-                  className="bg-white text-primary-600 px-4 py-1.5 rounded-lg transition-all duration-200 font-bold hover:bg-primary-50 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-0.5 active:scale-[0.98]"
+                  className="bg-primary-600 text-white px-4 py-1.5 rounded-lg transition-all duration-200 font-bold hover:bg-primary-700 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-0.5 active:scale-[0.98]"
                   onClick={closeMenus}
                 >
                   Anmelden
@@ -252,7 +252,7 @@ const Header: React.FC = () => {
               {/* Mobile Menu Button */}
               <button
                 onClick={toggleMobileMenu}
-                className="lg:hidden text-white hover:text-white/80 p-1.5 rounded-lg transition-all duration-200 min-w-[40px] min-h-[40px] flex items-center justify-center"
+                className="lg:hidden text-primary-600 hover:text-primary-700 p-1.5 rounded-lg transition-all duration-200 min-w-[40px] min-h-[40px] flex items-center justify-center"
                 aria-label={isMobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
                 aria-expanded={isMobileMenuOpen}
               >
@@ -300,18 +300,18 @@ const Header: React.FC = () => {
         style={{ top: 'calc(1rem + 70px + 0.5rem)' }}
       >
         <div
-          className="bg-primary-700/98 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden"
+          className="bg-white rounded-xl shadow-2xl overflow-hidden"
           style={{ maxHeight: 'calc(100vh - 120px)', overflowY: 'auto' }}
         >
           <div className="p-3">
-            <nav className="flex flex-col space-y-1 text-white">
+            <nav className="flex flex-col space-y-1">
               {/* Home */}
               <Link
                 to="/"
                 className={`py-2.5 px-3 rounded-lg font-bold min-h-[40px] flex items-center transition-all duration-200 transform ${
                   location.pathname === '/'
-                    ? 'text-white bg-primary-600/50'
-                    : 'text-white/90 hover:text-white hover:bg-primary-600/30'
+                    ? 'text-primary-600 bg-primary-50'
+                    : 'text-primary-600/80 hover:text-primary-600 hover:bg-primary-50/50'
                 } ${isMobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}
                 style={{ transitionDelay: isMobileMenuOpen ? '50ms' : '0ms' }}
                 onClick={closeMenus}
@@ -324,8 +324,8 @@ const Header: React.FC = () => {
                 to="/ueber-uns"
                 className={`py-2.5 px-3 rounded-lg font-bold min-h-[40px] flex items-center transition-all duration-200 transform ${
                   location.pathname === '/ueber-uns'
-                    ? 'text-white bg-primary-600/50'
-                    : 'text-white/90 hover:text-white hover:bg-primary-600/30'
+                    ? 'text-primary-600 bg-primary-50'
+                    : 'text-primary-600/80 hover:text-primary-600 hover:bg-primary-50/50'
                 } ${isMobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}
                 style={{ transitionDelay: isMobileMenuOpen ? '100ms' : '0ms' }}
                 onClick={closeMenus}
@@ -344,8 +344,8 @@ const Header: React.FC = () => {
                   onClick={toggleDropdown}
                   className={`py-2.5 px-3 rounded-lg flex items-center justify-between w-full text-left font-bold min-h-[40px] transition-all duration-200 ${
                     location.pathname.startsWith('/fuehrerscheine') || location.pathname.startsWith('/klasse-')
-                      ? 'text-white bg-primary-600/50'
-                      : 'text-white/90 hover:text-white hover:bg-primary-600/30'
+                      ? 'text-primary-600 bg-primary-50'
+                      : 'text-primary-600/80 hover:text-primary-600 hover:bg-primary-50/50'
                   }`}
                 >
                   <span>Führerscheine</span>
@@ -365,10 +365,10 @@ const Header: React.FC = () => {
                     isDropdownOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <div className="ml-3 mt-1 space-y-1 border-l-2 border-primary-500/50 pl-3">
+                  <div className="ml-3 mt-1 space-y-1 border-l-2 border-primary-200 pl-3">
                     <Link
                       to="/fuehrerscheine"
-                      className="block text-white/80 hover:text-white py-2 px-3 rounded font-semibold min-h-[40px] flex items-center transition-colors duration-200"
+                      className="block text-primary-600/80 hover:text-primary-600 py-2 px-3 rounded font-semibold min-h-[40px] flex items-center transition-colors duration-200"
                       onClick={closeMenus}
                     >
                       Übersicht
@@ -377,7 +377,7 @@ const Header: React.FC = () => {
                       <Link
                         key={page.path}
                         to={page.path}
-                        className="block text-white/80 hover:text-white py-2 px-3 rounded font-semibold min-h-[40px] flex items-center transition-colors duration-200"
+                        className="block text-primary-600/80 hover:text-primary-600 py-2 px-3 rounded font-semibold min-h-[40px] flex items-center transition-colors duration-200"
                         onClick={closeMenus}
                       >
                         {page.name}
@@ -392,8 +392,8 @@ const Header: React.FC = () => {
                 to="/kontakt"
                 className={`py-2.5 px-3 rounded-lg font-bold min-h-[40px] flex items-center transition-all duration-200 transform ${
                   location.pathname === '/kontakt'
-                    ? 'text-white bg-primary-600/50'
-                    : 'text-white/90 hover:text-white hover:bg-primary-600/30'
+                    ? 'text-primary-600 bg-primary-50'
+                    : 'text-primary-600/80 hover:text-primary-600 hover:bg-primary-50/50'
                 } ${isMobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}
                 style={{ transitionDelay: isMobileMenuOpen ? '200ms' : '0ms' }}
                 onClick={closeMenus}
@@ -410,7 +410,7 @@ const Header: React.FC = () => {
               >
                 <Link
                   to="/anmelden"
-                  className="bg-white text-primary-600 px-4 py-2.5 rounded-lg transition-all duration-200 inline-flex items-center justify-center font-bold min-h-[40px] w-full hover:bg-primary-50 hover:shadow-lg active:scale-[0.98]"
+                  className="bg-primary-600 text-white px-4 py-2.5 rounded-lg transition-all duration-200 inline-flex items-center justify-center font-bold min-h-[40px] w-full hover:bg-primary-700 hover:shadow-lg active:scale-[0.98]"
                   onClick={closeMenus}
                 >
                   Online Anmelden
