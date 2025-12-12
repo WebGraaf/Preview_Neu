@@ -60,7 +60,7 @@
     },
     "B": {
       "aktiv": true,
-      "unterklassen": ["B", "BE", "BF17"]
+      "unterklassen": ["B", "BE", "BF17","B96","B197"]
     },
     "C": {
       "aktiv": true,
