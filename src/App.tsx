@@ -16,6 +16,11 @@ import Kontakt from './pages/Kontakt';
 import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
 import NotFound from './pages/NotFound';
+import VorlageGemischt from './pages/VorlageGemischt';
+import VorlageKreativ1 from './pages/VorlageKreativ1';
+import VorlageKreativ2 from './pages/VorlageKreativ2';
+import VorlageTextFokus from './pages/VorlageTextFokus';
+import ComponentsTest from './pages/ComponentsTest';
 
 const App: React.FC = () => {
   return (
@@ -36,6 +41,12 @@ const App: React.FC = () => {
           <Route path="/kontakt" element={<Kontakt />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/datenschutz" element={<Datenschutz />} />
+          {/* Vorlagen-Seiten zum Anschauen */}
+          <Route path="/1" element={<VorlageGemischt />} />
+          <Route path="/2" element={<VorlageKreativ1 />} />
+          <Route path="/3" element={<VorlageKreativ2 />} />
+          <Route path="/4" element={<VorlageTextFokus />} />
+          <Route path="/components" element={<ComponentsTest />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
