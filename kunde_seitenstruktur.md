@@ -2,7 +2,7 @@
 
 ## Home `[MAIN]`
 ## UeberUns `[MAIN]`
-## Fuehrerscheine `[MAIN]`
+## Fuehrerscheine `[MAIN][NOPAGE]`
 ### Fuehrerscheine `[SUB]`
 ### KlasseA `[SUB]`
 ### KlasseB `[SUB]`
