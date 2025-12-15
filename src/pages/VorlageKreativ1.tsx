@@ -1,16 +1,16 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Star, X, ZoomIn, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
-import Layout from '../components/Layout';
+import { BookOpen, Award, Users, Clock, Star, Shield, Zap, Heart } from 'lucide-react';
+import BannerAnmelden from '../components/BannerAnmelden';
 
 gsap.registerPlugin(ScrollTrigger);
 
 // ============================================================================
 // VORLAGE 3: KREATIV 1 - "Showcase & Testimonials"
-// Diese Vorlage kombiniert Bildergalerie, Team-Karten und Bewertungen.
-// Ideal für: Portfolio-Seiten, Team-Präsentationen, Referenz-Seiten
+// Diese Vorlage hat 2 Textabschnitte und 2 Elemente.
+// Elemente: IconBadgeTextSplit (Elevated, Right), BannerMitIcons
 // ============================================================================
 
 // --- Inline Container Component ---
@@ -40,27 +40,86 @@ const Container: React.FC<ContainerProps> = ({
   );
 };
 
-// --- Inline Section Component ---
-interface SectionProps {
-  children: React.ReactNode;
-  background?: string;
-  padding?: string;
-  className?: string;
+// --- Inline IconBadgeTextSplit Component (Kopiert) ---
+interface BadgeItem {
+  icon: React.ReactNode;
+  label?: string;
 }
 
-const Section: React.FC<SectionProps> = ({
-  children,
-  background = 'transparent',
+interface IconBadgeTextSplitProps {
+  title: string;
+  description: string;
+  badges: BadgeItem[];
+  background?: string;
+  padding?: string;
+  variant?: 'default' | 'bordered' | 'elevated';
+  badgePosition?: 'left' | 'right';
+}
+
+const IconBadgeTextSplit: React.FC<IconBadgeTextSplitProps> = ({
+  title,
+  description,
+  badges,
+  background = 'page-bg',
   padding = 'md',
-  className = ''
+  variant = 'default',
+  badgePosition = 'left'
 }) => {
-  const paddingClasses: Record<string, string> = {
-    none: 'py-0',
-    xs: 'py-4 sm:py-6',
-    sm: 'py-6 sm:py-8',
-    md: 'py-8 sm:py-10',
-    lg: 'py-10 sm:py-12',
-    xl: 'py-12 sm:py-16'
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const badgesRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      // Animate badges
+      if (badgesRef.current?.children) {
+        const badgeX = badgePosition === 'left' ? -40 : 40;
+        tl.fromTo(
+          Array.from(badgesRef.current.children),
+          { opacity: 0, x: badgeX, scale: 0.8 },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: 'back.out(1.7)'
+          }
+        );
+      }
+
+      // Animate text content
+      if (textRef.current?.children) {
+        tl.fromTo(
+          Array.from(textRef.current.children),
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.15,
+            ease: 'power2.out'
+          },
+          '-=0.3'
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [badgePosition]);
+
+  const variantClasses = {
+    default: 'bg-transparent',
+    bordered: 'bg-background-card/50 border border-border/50 rounded-2xl',
+    elevated: 'bg-background-card shadow-lg rounded-2xl'
   };
 
   const backgroundClasses: Record<string, string> = {
@@ -74,529 +133,174 @@ const Section: React.FC<SectionProps> = ({
     'elevated-bg': 'bg-background-elevated'
   };
 
-  const bgClass = backgroundClasses[background] || '';
+  const paddingClasses: Record<string, string> = {
+    none: 'py-0',
+    xs: 'py-4 sm:py-6',
+    sm: 'py-6 sm:py-8',
+    md: 'py-8 sm:py-10',
+    lg: 'py-10 sm:py-12',
+    xl: 'py-12 sm:py-16'
+  };
 
   return (
-    <section className={`${bgClass} ${paddingClasses[padding] || paddingClasses.md} ${className}`}>
-      {children}
+    <section className={`${backgroundClasses[background] || ''} ${paddingClasses[padding] || paddingClasses.md}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          ref={sectionRef}
+          className={`${variantClasses[variant]} ${variant !== 'default' ? 'p-6 md:p-8 lg:p-10' : ''}`}
+          style={{ willChange: 'transform, opacity' }}
+        >
+          <div
+            className={`flex flex-col ${badgePosition === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-12 items-center`}
+          >
+            {/* Badges/Icons Section */}
+            <div
+              ref={badgesRef}
+              className="w-full lg:w-2/5 flex flex-wrap justify-center lg:justify-start gap-4 md:gap-6"
+            >
+              {badges.map((badge, index) => (
+                <div
+                  key={index}
+                  className="group flex flex-col items-center gap-2"
+                  style={{ willChange: 'transform, opacity' }}
+                >
+                  {/* Badge/Icon Container */}
+                  <div className="p-4 md:p-5 rounded-2xl bg-primary/10 group-hover:bg-primary/20 border border-primary/20 group-hover:border-primary/40 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
+                    {badge.icon}
+                  </div>
+                  {/* Optional Label */}
+                  {badge.label && (
+                    <span className="text-xs md:text-sm font-medium text-text-muted group-hover:text-primary transition-colors duration-300 text-center">
+                      {badge.label}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Text Content Section */}
+            <div
+              ref={textRef}
+              className="w-full lg:w-3/5 flex flex-col justify-center text-center lg:text-left space-y-4"
+            >
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-heading leading-tight">
+                {title}
+              </h2>
+              <p className="text-text text-base md:text-lg leading-relaxed">
+                {description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
 
-// --- Inline Lightbox Component ---
-interface LightboxProps {
-  images: string[];
-  isOpen: boolean;
-  currentIndex: number;
-  onClose: () => void;
-  onNext?: () => void;
-  onPrev?: () => void;
-}
-
-const Lightbox: React.FC<LightboxProps> = ({
-  images,
-  isOpen,
-  currentIndex,
-  onClose,
-  onNext,
-  onPrev,
-}) => {
-  const [isZoomed, setIsZoomed] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') onClose();
-        if (e.key === 'ArrowRight' && onNext) onNext();
-        if (e.key === 'ArrowLeft' && onPrev) onPrev();
-      };
-      document.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.removeEventListener('keydown', handleKeyDown);
-        document.body.style.overflow = 'unset';
-      };
-    }
-  }, [isOpen, onClose, onNext, onPrev]);
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center animate-in fade-in duration-300">
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 p-3 text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 z-10 hover:scale-110 hover:rotate-90"
-      >
-        <X className="w-6 h-6" />
-      </button>
-
-      <button
-        onClick={() => setIsZoomed(!isZoomed)}
-        className="absolute top-4 right-20 p-3 text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 z-10 hover:scale-110"
-      >
-        {isZoomed ? <Maximize2 className="w-6 h-6" /> : <ZoomIn className="w-6 h-6" />}
-      </button>
-
-      {onPrev && images.length > 1 && (
-        <button
-          onClick={onPrev}
-          className="absolute left-4 p-4 text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 hover:-translate-x-1"
-        >
-          <ChevronLeft className="w-8 h-8" />
-        </button>
-      )}
-
-      <div className={`relative max-w-7xl max-h-[90vh] transition-all duration-500 ease-out ${isZoomed ? 'scale-150' : 'scale-100'}`}>
-        <img
-          src={images[currentIndex]}
-          alt={`Gallery image ${currentIndex + 1}`}
-          className="w-full h-full object-contain rounded-2xl shadow-2xl"
-        />
-      </div>
-
-      {onNext && images.length > 1 && (
-        <button
-          onClick={onNext}
-          className="absolute right-4 p-4 text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 hover:translate-x-1"
-        >
-          <ChevronRight className="w-8 h-8" />
-        </button>
-      )}
-
-      {images.length > 1 && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white bg-black/60 backdrop-blur-sm px-6 py-3 rounded-full text-sm font-medium shadow-lg">
-          {currentIndex + 1} / {images.length}
-        </div>
-      )}
-    </div>
-  );
-};
-
-// --- Inline BilderGallerie Component ---
-interface BilderGallerieProps {
-  images?: string[];
-  title?: string;
-}
-
-const BilderGallerie: React.FC<BilderGallerieProps> = ({
-  images = [],
-  title
-}) => {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const galleryItemsRef = useRef<HTMLButtonElement[]>([]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const items = galleryItemsRef.current.filter(Boolean);
-    
-    if (!container || items.length === 0) return;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: "top 75%",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    tl.fromTo(items,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power3.out"
-      }
-    );
-
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.trigger === container) {
-          trigger.kill();
-        }
-      });
-    };
-  }, []);
-
-  const openLightbox = (index: number) => {
-    setCurrentIndex(index);
-    setLightboxOpen(true);
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  return (
-    <div ref={containerRef} className="py-8 md:py-12 px-4 bg-background">
-      {title && (
-        <h2 className="text-3xl md:text-4xl font-bold text-heading mb-8 text-center">{title}</h2>
-      )}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {images.map((image, index) => (
-          <button
-            key={index}
-            ref={(el) => (galleryItemsRef.current[index] = el!)}
-            onClick={() => openLightbox(index)}
-            className="gallery-item relative aspect-square overflow-hidden rounded-2xl group cursor-pointer bg-gray-100 shadow-md transition-opacity transition-shadow duration-300 ease-out hover:shadow-xl hover:-translate-y-1"
-          >
-            <img
-              src={image}
-              alt={`Gallery image ${index + 1}`}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-            <div className="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <ZoomIn className="zoom-icon w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out drop-shadow-lg" />
-            </div>
-          </button>
-        ))}
-      </div>
-
-      <Lightbox
-        images={images}
-        isOpen={lightboxOpen}
-        currentIndex={currentIndex}
-        onClose={() => setLightboxOpen(false)}
-        onNext={handleNext}
-        onPrev={handlePrev}
-      />
-    </div>
-  );
-};
-
-// --- Inline TeamBilder Component ---
-interface Team {
-  imageSrc: string;
-  imageAlt?: string;
+// --- Inline BannerMitIcons Component (Kopiert) ---
+interface IconItem {
+  icon: React.ReactNode;
   title: string;
   description: string;
 }
 
-interface TeamBilderProps {
-  teams: Team[];
-  variant?: 'default' | 'muted' | 'outline';
-  className?: string;
+interface BannerMitIconsProps {
+  items: IconItem[];
+  background?: string;
+  padding?: string;
 }
 
-const TeamBilder: React.FC<TeamBilderProps> = ({
-  teams,
-  variant = 'default',
-  className = '',
+const BannerMitIcons: React.FC<BannerMitIconsProps> = ({
+  items,
+  background = "page-bg",
+  padding = "sm"
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const hasAnimatedRef = useRef(false);
-  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    const container = containerRef.current;
-    const cards = cardRefs.current.filter(Boolean);
-    
-    if (!container || hasAnimatedRef.current) return;
+    const ctx = gsap.context(() => {
+      // Create a single timeline for all scroll animations
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
 
-    gsap.set(container, { opacity: 0, y: 40 });
-    gsap.set(cards, { opacity: 0, y: 40 });
-
-    scrollTriggerRef.current = ScrollTrigger.create({
-      trigger: container,
-      start: 'top 80%',
-      once: true,
-      onEnter: () => {
-        if (hasAnimatedRef.current) return;
-        hasAnimatedRef.current = true;
-
-        const tl = gsap.timeline();
-
-        tl.to(container, {
+      // Animate container
+      tl.fromTo(sectionRef.current,
+        { opacity: 0, y: 40 },
+        {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-        });
-
-        if (cards.length > 0) {
-          tl.to(
-            cards,
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              stagger: 0.2,
-              ease: 'power3.out',
-            },
-            '-=0.3'
-          );
+          duration: 0.8,
+          ease: "power2.out"
         }
-      },
-    });
+      );
 
-    return () => {
-      if (scrollTriggerRef.current) {
-        scrollTriggerRef.current.kill();
-        scrollTriggerRef.current = null;
-      }
-    };
+      // Animate icon cards with stagger
+      tl.fromTo(cardRefs.current.filter(Boolean),
+        { opacity: 0, y: 30, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out"
+        },
+        "-=0.4"
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
-  const variantClasses = {
-    default: 'bg-background-card border border-border',
-    muted: 'bg-background-card border border-border',
-    outline: 'bg-background-card border border-border',
+  const backgroundClasses: Record<string, string> = {
+    transparent: 'bg-transparent',
+    white: 'bg-white',
+    gray: 'bg-neutral-100',
+    blue: 'bg-primary-50',
+    'page-bg': 'bg-background',
+    'card-bg': 'bg-background-card',
+    'card-tint': 'bg-background-tint',
+    'elevated-bg': 'bg-background-elevated'
+  };
+
+  const paddingClasses: Record<string, string> = {
+    none: 'py-0',
+    xs: 'py-4 sm:py-6',
+    sm: 'py-6 sm:py-8',
+    md: 'py-8 sm:py-10',
+    lg: 'py-10 sm:py-12',
+    xl: 'py-12 sm:py-16'
   };
 
   return (
-    <div
-      ref={containerRef}
-      className={`flex flex-col md:flex-row gap-6 md:gap-8 justify-center ${className}`}
-    >
-      {teams.slice(0, 2).map((team, index) => (
-        <div
-          key={index}
-          ref={(el) => (cardRefs.current[index] = el)}
-          className={`md:w-1/2 rounded-2xl overflow-hidden ${variantClasses[variant]} max-w-sm mx-auto md:mx-0 cursor-pointer shadow-lg transition-shadow duration-300 ease-out hover:shadow-2xl group`}
-        >
-          <div className="grid grid-rows-[2fr_1fr] gap-0">
-            <div className="h-full overflow-hidden relative">
-              <img
-                src={team.imageSrc}
-                alt={team.imageAlt || ''}
-                className="w-full h-full object-cover aspect-[2/3]"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                <span className="text-white font-bold text-xl drop-shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 ease-out">{team.title}</span>
+    <section className={`${backgroundClasses[background] || ''} ${paddingClasses[padding] || paddingClasses.sm}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div ref={sectionRef} className="bg-gradient-to-br from-background-card via-background-card to-background-tint rounded-2xl p-6 md:p-10 border border-border/50 shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden" style={{ willChange: 'transform, opacity' }}>
+          {/* Subtle pattern background */}
+          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_1px_1px,_currentColor_1px,_transparent_0)] bg-[length:20px_20px]" />
+          <div className="relative z-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+            {items.map((item, index) => (
+              <div
+                key={index}
+                ref={(el) => (cardRefs.current[index] = el!)}
+                className="icon-card flex flex-col items-center text-center p-4 md:p-6 rounded-xl bg-background-card/50 hover:bg-background-card transition-all duration-300 cursor-pointer group hover:-translate-y-2 hover:scale-[1.02]"
+                style={{ willChange: 'transform, opacity' }}
+              >
+                <div className="icon-bg mb-4 p-3 md:p-4 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 shadow-sm group-hover:shadow-md">{item.icon}</div>
+                <h4 className="text-base md:text-lg font-semibold text-heading mb-2 group-hover:text-primary transition-colors duration-300">{item.title}</h4>
+                <p className="text-text text-sm leading-relaxed">{item.description}</p>
               </div>
-            </div>
-            <div className="p-5 md:p-6 flex flex-col justify-center bg-gradient-to-b from-transparent to-background-tint/30 transition-transform duration-300 ease-out group-hover:-translate-y-1">
-              <h3 className="text-lg md:text-xl font-bold text-neutral-900 mb-2">{team.title}</h3>
-              <p className="text-neutral-600 text-sm md:text-base leading-relaxed">{team.description}</p>
-            </div>
+            ))}
           </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-// --- Inline Bewertungen Component ---
-interface Testimonial {
-  name: string;
-  role: string;
-  initials: string;
-  rating: number;
-  text: string;
-}
-
-interface BewertungenProps {
-  testimonials?: Testimonial[];
-  title?: string;
-}
-
-const Bewertungen: React.FC<BewertungenProps> = ({
-  testimonials = [],
-  title = 'Bewertungen'
-}) => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const testimonialRefs = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const cards = testimonialRefs.current.filter(Boolean);
-    
-    if (!section || cards.length === 0) return;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    tl.fromTo(".reviews-title",
-      { opacity: 0, y: -30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out"
-      }
-    );
-
-    tl.fromTo(cards,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.12,
-        ease: "power3.out"
-      },
-      "-=0.3"
-    );
-
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.trigger === section) {
-          trigger.kill();
-        }
-      });
-    };
-  }, []);
-
-  return (
-    <section ref={sectionRef} className="py-8 md:py-12 bg-background">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-xl">
-        <h2 className="reviews-title text-3xl font-bold text-heading mb-8 text-center">{title}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              ref={(el) => (testimonialRefs.current[index] = el!)}
-              className="testimonial-card border-2 border-neutral-200 rounded-2xl p-6 bg-background-card shadow-md transition-shadow duration-300 ease-out hover:shadow-xl hover:border-primary-200 group"
-            >
-              <div className="flex items-center mb-4">
-                <div className="testimonial-avatar w-12 h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold mr-4 shadow-md">
-                  {testimonial.initials}
-                </div>
-                <div>
-                  <h4 className="font-semibold text-heading">{testimonial.name}</h4>
-                  <p className="text-sm text-neutral-500">{testimonial.role}</p>
-                </div>
-              </div>
-              <div className="flex items-center mb-4 gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`star-icon w-5 h-5 ${
-                      i < testimonial.rating
-                        ? 'text-amber-400 fill-amber-400 drop-shadow-sm'
-                        : 'text-neutral-200 fill-neutral-200'
-                    }`}
-                    style={{ transitionDelay: `${i * 30}ms` }}
-                  />
-                ))}
-                <span className="ml-2 text-sm font-medium text-neutral-500">
-                  {testimonial.rating}/5
-                </span>
-              </div>
-              <p className="text-text leading-relaxed">{testimonial.text}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>
-  );
-};
-
-// --- Inline KartenSpotlight Component ---
-interface Position {
-  x: number;
-  y: number;
-}
-
-type SpotlightColorKey = 'primary' | 'secondary' | 'brand-500';
-
-const spotlightColorMap: Record<SpotlightColorKey, string> = {
-  primary: 'var(--spotlight-primary)',
-  secondary: 'var(--spotlight-secondary)',
-  'brand-500': 'var(--spotlight-brand-500)',
-};
-
-interface KartenSpotlightProps extends React.PropsWithChildren {
-  className?: string;
-  spotlightColor?: SpotlightColorKey;
-}
-
-const KartenSpotlight: React.FC<KartenSpotlightProps> = ({
-  children,
-  className = '',
-  spotlightColor = 'primary'
-}) => {
-  const divRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number | null>(null);
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState<number>(0);
-  const [isHovered, setIsHovered] = useState<boolean>(false);
-
-  const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = React.useCallback((e) => {
-    if (!divRef.current || isFocused) return;
-
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-    }
-
-    rafRef.current = requestAnimationFrame(() => {
-      if (!divRef.current) return;
-      const rect = divRef.current.getBoundingClientRect();
-      setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    });
-  }, [isFocused]);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-    setOpacity(0.6);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-    setOpacity(0);
-  };
-
-  const handleMouseEnter = () => {
-    setOpacity(0.6);
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setOpacity(0);
-    setIsHovered(false);
-  };
-
-  return (
-    <div
-      ref={divRef}
-      onMouseMove={handleMouseMove}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`relative rounded-2xl border border-border bg-card overflow-hidden
-        transition-all duration-300 ease-out
-        hover:border-primary-200 hover:shadow-lg hover:shadow-primary-500/5
-        focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2
-        ${className}`}
-    >
-      <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out"
-        style={{
-          opacity,
-          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColorMap[spotlightColor]}, transparent 80%)`
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-300"
-        style={{
-          opacity: isHovered ? 0.3 : 0,
-          boxShadow: `inset 0 0 30px rgba(var(--primary-rgb, 255, 107, 0), 0.08)`
-        }}
-      />
-      <div className="relative z-10">
-        {children}
-      </div>
-    </div>
   );
 };
 
@@ -618,195 +322,123 @@ const VorlageKreativ1: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
-  // Placeholder Bilder
-  const placeholderImage1 = '/default_images/Platzhalter_Fahrschule.webp';
-  const placeholderImage2 = '/default_images/Platzhalter_Furhpark.webp';
-  const placeholderImage3 = '/default_images/Platzhalter_Gruppenbild_Team.webp';
-  const placeholderTeam = '/default_images/Platzhalter_Teammitglied.webp';
-
-  // Galerie-Bilder
-  const galerieImages = [
-    placeholderImage1,
-    placeholderImage2,
-    placeholderImage3,
-    placeholderImage1,
-    placeholderImage2,
-    placeholderImage3,
+  // Daten für IconBadgeTextSplit (Elevated, Right)
+  const badgeItems: BadgeItem[] = [
+    { icon: <BookOpen className="w-6 h-6 md:w-8 md:h-8 text-primary" />, label: 'Lorem Ipsum' },
+    { icon: <Award className="w-6 h-6 md:w-8 md:h-8 text-primary" />, label: 'Sed Tempor' },
+    { icon: <Users className="w-6 h-6 md:w-8 md:h-8 text-primary" />, label: 'Ut Enim' },
+    { icon: <Clock className="w-6 h-6 md:w-8 md:h-8 text-primary" />, label: 'Duis Aute' }
   ];
 
-  // Team-Daten
-  const teamMembers: Team[] = [
+  // Daten für BannerMitIcons
+  const iconItems: IconItem[] = [
     {
-      imageSrc: placeholderTeam,
-      imageAlt: 'Lorem Ipsum',
+      icon: <Star className="w-6 h-6 md:w-8 md:h-8 text-primary" />,
       title: 'Lorem Ipsum',
-      description: 'Dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.'
+      description: 'Dolor sit amet consectetur adipiscing elit'
     },
     {
-      imageSrc: placeholderTeam,
-      imageAlt: 'Sed Tempor',
+      icon: <Shield className="w-6 h-6 md:w-8 md:h-8 text-primary" />,
       title: 'Sed Tempor',
-      description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.'
-    }
-  ];
-
-  const teamMembers2: Team[] = [
-    {
-      imageSrc: placeholderTeam,
-      imageAlt: 'Ut Enim',
-      title: 'Ut Enim',
-      description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.'
+      description: 'Incididunt ut labore et dolore magna'
     },
     {
-      imageSrc: placeholderTeam,
-      imageAlt: 'Duis Aute',
+      icon: <Zap className="w-6 h-6 md:w-8 md:h-8 text-primary" />,
+      title: 'Ut Enim',
+      description: 'Ad minim veniam quis nostrud exercitation'
+    },
+    {
+      icon: <Heart className="w-6 h-6 md:w-8 md:h-8 text-primary" />,
       title: 'Duis Aute',
-      description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.'
-    }
-  ];
-
-  // Bewertungen-Daten
-  const testimonials: Testimonial[] = [
-    {
-      name: 'Lorem Ipsum',
-      role: 'Dolor Sit',
-      initials: 'LI',
-      rating: 5,
-      text: 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-    {
-      name: 'Sed Tempor',
-      role: 'Amet Consectetur',
-      initials: 'ST',
-      rating: 5,
-      text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.'
-    },
-    {
-      name: 'Ut Enim',
-      role: 'Adipiscing Elit',
-      initials: 'UE',
-      rating: 4,
-      text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
-    }
-  ];
-
-  // Spotlight-Karten Daten
-  const spotlightCards = [
-    {
-      title: 'Lorem Ipsum',
-      description: 'Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
-      value: '100+'
-    },
-    {
-      title: 'Sed Tempor',
-      description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
-      value: '50+'
-    },
-    {
-      title: 'Ut Enim',
-      description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.',
-      value: '25+'
+      description: 'Irure dolor in reprehenderit voluptate'
     }
   ];
 
   return (
-    <Layout>
-      <div className="bg-background">
-        <Helmet>
-          <title>Vorlage Kreativ 1 - Template</title>
-          <meta name="description" content="Kreative Vorlage mit Galerie, Team und Bewertungen" />
-          <meta name="robots" content="noindex, nofollow" />
-        </Helmet>
+    <div className="bg-background">
+      <Helmet>
+        <title>Vorlage Kreativ 1 - Template</title>
+        <meta name="description" content="Kreative Vorlage mit Galerie, Team und Bewertungen" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
 
-        {/* Hero/Header Section */}
-        <Section background="page-bg" padding="xl">
+        {/* Hero/Header Section - gleiche Abstände wie UeberUns */}
+        <section className="py-8 md:py-12 bg-background">
           <Container size="md">
-            <div ref={headerRef} className="text-center">
+            <div ref={headerRef} className="text-center max-w-3xl mx-auto">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-heading mb-6 tracking-tight">
                 Lorem Ipsum Dolor
               </h1>
-              <p className="text-lg md:text-xl text-text leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-text leading-relaxed">
                 Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
             </div>
           </Container>
-        </Section>
+        </section>
 
-        {/* Spotlight Cards Section */}
-        <Section background="page-bg" padding="lg">
-          <Container>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {spotlightCards.map((card, index) => (
-                <KartenSpotlight key={index} className="p-6">
-                  <div className="text-center">
-                    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{card.value}</div>
-                    <h3 className="text-xl font-bold text-heading mb-2">{card.title}</h3>
-                    <p className="text-text text-sm">{card.description}</p>
-                  </div>
-                </KartenSpotlight>
-              ))}
-            </div>
-          </Container>
-        </Section>
-
-        {/* Bildergalerie Section */}
-        <Section background="page-bg" padding="lg">
-          <Container>
-            <BilderGallerie 
-              images={galerieImages} 
-              title="Unsere Galerie"
-            />
-          </Container>
-        </Section>
-
-        {/* Team Section */}
-        <Section background="page-bg" padding="lg">
-          <Container>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-heading mb-4">Unser Team</h2>
-              <p className="text-lg text-text max-w-2xl mx-auto">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.
-              </p>
-            </div>
-            <div className="space-y-8">
-              <TeamBilder teams={teamMembers} variant="default" />
-              <TeamBilder teams={teamMembers2} variant="muted" />
-            </div>
-          </Container>
-        </Section>
-
-        {/* Bewertungen Section */}
-        <Section background="page-bg" padding="lg">
-          <Container>
-            <Bewertungen 
-              testimonials={testimonials} 
-              title="Was unsere Kunden sagen"
-            />
-          </Container>
-        </Section>
-
-        {/* CTA Section */}
-        <Section background="page-bg" padding="lg">
+        {/* Textabschnitt 1 */}
+        <section className="py-8 md:py-12 bg-background">
           <Container size="md">
-            <div className="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl p-8 md:p-12 shadow-xl text-center text-white">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                Bereit Loszulegen?
+            <div className="prose prose-lg max-w-none">
+              <h2 className="text-3xl md:text-4xl font-bold text-heading mb-6">
+                Sed Ut Perspiciatis Unde
               </h2>
-              <p className="text-white/90 leading-relaxed max-w-2xl mx-auto mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt 
-                ut labore et dolore magna aliqua.
+              <p className="text-text leading-relaxed mb-6">
+                Omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
+                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
               </p>
-              <a
-                href="#"
-                className="inline-block bg-white text-primary-600 px-8 py-4 rounded-xl font-semibold hover:bg-neutral-100 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out shadow-lg"
-              >
-                Lorem Ipsum
-              </a>
+              <p className="text-text leading-relaxed">
+                Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro 
+                quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia 
+                non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+              </p>
             </div>
           </Container>
-        </Section>
-      </div>
-    </Layout>
+        </section>
+
+        {/* Element 1: IconBadgeTextSplit (Elevated, Right) */}
+        <IconBadgeTextSplit
+          title="At Vero Eos Et Accusamus"
+          description="Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi."
+          badges={badgeItems}
+          background="page-bg"
+          padding="md"
+          variant="elevated"
+          badgePosition="right"
+        />
+
+        {/* Textabschnitt 2 */}
+        <section className="py-8 md:py-12 bg-background">
+          <Container size="md">
+            <div className="prose prose-lg max-w-none">
+              <h2 className="text-3xl md:text-4xl font-bold text-heading mb-6">
+                Nam Libero Tempore
+              </h2>
+              <p className="text-text leading-relaxed mb-6">
+                Cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat 
+                facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem 
+                quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet.
+              </p>
+              <p className="text-text leading-relaxed">
+                Ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur 
+                a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis 
+                doloribus asperiores repellat.
+              </p>
+            </div>
+          </Container>
+        </section>
+
+        {/* Element 2: BannerMitIcons */}
+        <BannerMitIcons
+          items={iconItems}
+          background="page-bg"
+          padding="md"
+        />
+
+      {/* BannerAnmelden (importiert aus /components) */}
+      <BannerAnmelden />
+    </div>
   );
 };
 

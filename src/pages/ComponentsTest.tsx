@@ -1,9 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Car, Shield, Users, Award, Clock, MapPin, Phone, CheckCircle, Star, Zap } from 'lucide-react';
+import { Car, Shield, Users, Award, Clock, MapPin, Phone, CheckCircle, Star, Zap, GraduationCap, Trophy, ThumbsUp, HeartHandshake } from 'lucide-react';
 
 // Import all components from /src/components (excluding ui/, Layout, Header, ScrollToTop, SchemaMarkup, ConsentBanner, ConsentSettings)
 import { AnmeldeFormular } from '../components/AnmeldeFormular';
+import { IconBadgeTextSplit } from '../components/IconBadgeTextSplit';
+import { IconListTextSplit } from '../components/IconListTextSplit';
 import { IconTextFeature } from '../components/IconTextFeature';
 import { IconTextList } from '../components/IconTextList';
 import BannerAnmelden from '../components/BannerAnmelden';
@@ -81,8 +83,116 @@ const ComponentsTest: React.FC = () => {
         </div>
       </div>
 
-      {/* NEW: IconTextFeature */}
-      <ComponentSection title="IconTextFeature (NEU)">
+      {/* NEW: IconBadgeTextSplit */}
+      <ComponentSection title="IconBadgeTextSplit (NEU)">
+        <IconBadgeTextSplit
+          title="Unsere Stärken auf einen Blick"
+          description="Mit über 20 Jahren Erfahrung in der Fahrausbildung haben wir tausende Fahrschüler erfolgreich zum Führerschein begleitet. Unser Team aus qualifizierten Fahrlehrern setzt auf moderne Lehrmethoden und individuelle Betreuung, damit Sie sicher und selbstbewusst auf die Straße kommen."
+          badges={[
+            {
+              icon: <GraduationCap className="w-8 h-8 md:w-10 md:h-10 text-primary" />,
+              label: "Erfahrung"
+            },
+            {
+              icon: <Trophy className="w-8 h-8 md:w-10 md:h-10 text-primary" />,
+              label: "Erfolgsquote"
+            },
+            {
+              icon: <ThumbsUp className="w-8 h-8 md:w-10 md:h-10 text-primary" />,
+              label: "Qualität"
+            },
+            {
+              icon: <HeartHandshake className="w-8 h-8 md:w-10 md:h-10 text-primary" />,
+              label: "Betreuung"
+            }
+          ]}
+          variant="bordered"
+          badgePosition="left"
+        />
+      </ComponentSection>
+
+      {/* IconBadgeTextSplit - Elevated Variant */}
+      <ComponentSection title="IconBadgeTextSplit (Elevated, Right)">
+        <IconBadgeTextSplit
+          title="Moderne Ausstattung"
+          description="Unsere Fahrschule verfügt über eine moderne Fahrzeugflotte und digitale Lernmittel. Von der Theorie-App bis zum Fahrsimulator – wir nutzen die neuesten Technologien für Ihren Lernerfolg."
+          badges={[
+            {
+              icon: <Car className="w-8 h-8 md:w-10 md:h-10 text-primary" />,
+              label: "Fahrzeuge"
+            },
+            {
+              icon: <Shield className="w-8 h-8 md:w-10 md:h-10 text-primary" />,
+              label: "Sicherheit"
+            },
+            {
+              icon: <Zap className="w-8 h-8 md:w-10 md:h-10 text-primary" />,
+              label: "Technik"
+            }
+          ]}
+          variant="elevated"
+          badgePosition="right"
+        />
+      </ComponentSection>
+
+      {/* NEW: IconListTextSplit */}
+      <ComponentSection title="IconListTextSplit (NEU)">
+        <IconListTextSplit
+          title="Ihre Vorteile bei uns"
+          description="Wir begleiten Sie auf dem Weg zum Führerschein mit einem umfassenden Ausbildungskonzept. Von der ersten Theoriestunde bis zur bestandenen Prüfung stehen wir Ihnen mit Rat und Tat zur Seite. Profitieren Sie von unserer langjährigen Erfahrung und unserem engagierten Team."
+          items={[
+            {
+              icon: <CheckCircle className="w-6 h-6 text-primary" />,
+              text: "Individuelle Betreuung durch erfahrene Fahrlehrer"
+            },
+            {
+              icon: <Clock className="w-6 h-6 text-primary" />,
+              text: "Flexible Terminvereinbarung auch am Wochenende"
+            },
+            {
+              icon: <Car className="w-6 h-6 text-primary" />,
+              text: "Moderne Fahrzeuge mit neuester Sicherheitstechnik"
+            },
+            {
+              icon: <Award className="w-6 h-6 text-primary" />,
+              text: "Hohe Erfolgsquote bei Erst- und Wiederholungsprüfungen"
+            }
+          ]}
+          variant="bordered"
+          listPosition="left"
+        />
+      </ComponentSection>
+
+      {/* IconListTextSplit - Right Variant */}
+      <ComponentSection title="IconListTextSplit (Elevated, Right)">
+        <IconListTextSplit
+          title="Unser Ausbildungskonzept"
+          description="Mit unserem bewährten Ausbildungskonzept erreichen Sie Ihr Ziel schnell und sicher. Wir setzen auf eine Kombination aus fundierter Theorie und praxisnaher Fahrausbildung."
+          items={[
+            {
+              icon: <GraduationCap className="w-6 h-6 text-primary" />,
+              text: "Strukturierter Theorieunterricht mit modernen Medien"
+            },
+            {
+              icon: <MapPin className="w-6 h-6 text-primary" />,
+              text: "Praxisnahe Fahrstunden in Stadt und Umgebung"
+            },
+            {
+              icon: <Users className="w-6 h-6 text-primary" />,
+              text: "Kleine Gruppen für optimalen Lernerfolg"
+            },
+            {
+              icon: <Star className="w-6 h-6 text-primary" />,
+              text: "Intensive Prüfungsvorbereitung inklusive"
+            }
+          ]}
+          variant="elevated"
+          listPosition="right"
+        />
+      </ComponentSection>
+
+      {/* IconTextFeature */}
+      <ComponentSection title="IconTextFeature">
         <IconTextFeature
           title="Warum unsere Fahrschule?"
           subtitle="Entdecken Sie die Vorteile einer Ausbildung bei uns"

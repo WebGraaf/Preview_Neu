@@ -241,3 +241,47 @@ Bei der Arbeit mit diesem Projekt sollten folgende Dateien zuerst gelesen werden
 - GSAP für Scroll-Animationen
 - Framer Motion für Interaktionen
 - Performance beachten (will-change, GPU-Beschleunigung)
+
+---
+
+## ⚠️ Wichtige Hinweise für Seitenentwicklung
+
+### Layout-Komponente und Footer
+
+**WICHTIG:** Die `Layout`-Komponente (`src/components/Layout.tsx`) enthält bereits den **Header** und **Footer**.
+
+Wenn eine Seite mit `<Layout>` umschlossen wird:
+- ❌ **KEINEN** zusätzlichen Footer oder Footer-ähnliche CTA-Sektionen am Ende der Seite hinzufügen
+- ✅ Stattdessen `BannerAnmelden` aus `/src/components/BannerAnmelden.tsx` importieren und verwenden
+- ✅ Der Footer wird automatisch durch die Layout-Komponente gerendert
+
+**Beispiel für korrekten Seitenaufbau:**
+```tsx
+import Layout from '../components/Layout';
+import BannerAnmelden from '../components/BannerAnmelden';
+
+const MeineSeite: React.FC = () => {
+  return (
+    <Layout>
+      <div className="bg-background">
+        {/* Seiteninhalt */}
+        
+        {/* CTA-Banner vor dem automatischen Footer */}
+        <BannerAnmelden />
+      </div>
+    </Layout>
+  );
+};
+```
+
+### Abstände und Spacing
+
+Für konsistente Abstände auf allen Seiten:
+- **Hero/Header-Sektionen**: `py-8 md:py-12` (wie auf UeberUns-Seite)
+- **Normale Sektionen**: `py-8 md:py-12` oder `padding="md"` bei Komponenten
+- **Referenz**: Die `UeberUns.tsx` Seite dient als Referenz für korrekte Abstände
+
+### Komponenten kopieren vs. importieren
+
+- **Kopieren (inline)**: Wenn Änderungen an der Komponente keine Auswirkungen auf andere Seiten haben sollen
+- **Importieren**: Für globale Komponenten wie `BannerAnmelden`, `Layout`, `Header`, `Footer`
