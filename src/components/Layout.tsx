@@ -93,13 +93,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12">
             {/* Company Info */}
             <div className="space-y-3 md:space-y-4">
-              <h3 className="text-base md:text-lg font-bold text-white tracking-wide">DriveAcademy GmbH</h3>
+              <h3 className="text-base md:text-lg font-bold text-white tracking-wide">Musterfahrschule GmbH</h3>
               <p className="text-sm text-neutral-300 leading-relaxed">
-                Hauptstraße 123<br />
-                10115 Berlin<br />
+                Musterstraße 123<br />
+                12345 Musterstadt<br />
                 Germany
               </p>
-              <p className="text-sm text-neutral-400">&copy; 2025 DriveAcademy GmbH</p>
+              <p className="text-sm text-neutral-400">&copy; 2025 Musterfahrschule GmbH</p>
             </div>
 
             {/* Contact */}
@@ -108,29 +108,29 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="space-y-2 md:space-y-3 text-sm">
                 <p>
                   <a
-                    href="tel:+493012345678"
+                    href="tel:+4912345678901"
                     className="inline-flex items-center gap-2 text-neutral-300 hover:text-primary-300 hover:translate-x-1 transition-all duration-300"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-primary-400 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    +49 (0) 30 12345678
+                    +49 (0) 123 45678901
                   </a>
                 </p>
                 <p>
                   <a
-                    href="mailto:info@driveacademy.de"
+                    href="mailto:info@musterfahrschule.de"
                     className="inline-flex items-center gap-2 text-neutral-300 hover:text-primary-300 hover:translate-x-1 transition-all duration-300"
                   >
-                    info@driveacademy.de
+                    info@musterfahrschule.de
                   </a>
                 </p>
                 <p>
                   <a
-                    href="https://www.driveacademy.de"
+                    href="https://www.musterfahrschule.de"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-neutral-300 hover:text-primary-300 hover:translate-x-1 transition-all duration-300"
                   >
-                    www.driveacademy.de
+                    www.musterfahrschule.de
                   </a>
                 </p>
               </div>
@@ -196,7 +196,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {/* Bottom Bar */}
           <div className="mt-8 md:mt-10 lg:mt-12 pt-6 md:pt-8 border-t border-neutral-700/50 text-center space-y-2">
             <p className="text-xs md:text-sm text-neutral-400">
-              Geschäftsführer: Michael Schmidt | Fahrlehrererlaubnis: FL-2024-12345
+              Geschäftsführer: Max Mustermann | Fahrlehrererlaubnis: FL-2024-12345
             </p>
             <p className="text-xs text-neutral-500">
               Website erstellt von{' '}

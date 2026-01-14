@@ -6,6 +6,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useConfig } from '../config';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import BannerAnmelden from '../components/BannerAnmelden';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -133,7 +134,6 @@ const UeberUns: React.FC = () => {
   const { config, bilderConfig } = useConfig();
   const { elementRef: headerRef, isVisible: headerVisible } = useScrollReveal();
   const { elementRef: teamHeaderRef, isVisible: teamHeaderVisible } = useScrollReveal();
-  const { elementRef: ctaRef, isVisible: ctaVisible } = useScrollReveal();
 
   // Get intro text from config with fallback
   const ueberUnsIntro = config?.texte?.ueberUnsIntro || 'Seit über 20 Jahren sind wir deine Fahrschule des Vertrauens. Mit viel Herz, Erfahrung und modernster Ausstattung begleiten wir dich auf deinem Weg zum Führerschein.\n\nUnser Ziel ist es nicht nur, dir das Fahren beizubringen, sondern dich zu einem sicheren und verantwortungsvollen Verkehrsteilnehmer zu machen.';
@@ -270,37 +270,8 @@ const UeberUns: React.FC = () => {
         </Container>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-8 md:py-12 bg-background">
-        <Container>
-          <div
-            ref={ctaRef as React.RefObject<HTMLDivElement>}
-            className="relative bg-gradient-to-br from-background-card to-background-tint rounded-2xl p-8 md:p-12 lg:p-16 border border-border shadow-lg text-center max-w-4xl mx-auto overflow-hidden"
-            style={{
-              opacity: ctaVisible ? 1 : 0,
-              transform: ctaVisible ? 'translateY(0)' : 'translateY(30px)',
-              transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
-            }}
-          >
-            {/* Decorative elements */}
-            <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-primary-100 to-transparent rounded-br-full opacity-50"></div>
-            <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-primary-100 to-transparent rounded-tl-full opacity-50"></div>
-            
-            <h2 className="relative text-3xl md:text-4xl font-bold text-heading mb-4 tracking-tight">
-              Werde Teil unserer Familie
-            </h2>
-            <p className="relative text-lg md:text-xl text-text mb-8 max-w-2xl mx-auto leading-relaxed">
-              Hunderte zufriedene Fahrschüler haben bereits bei uns ihren Führerschein gemacht. Jetzt bist du an der Reihe! Melde dich noch heute an und starte deine Fahrt in die Zukunft.
-            </p>
-            <a
-              href="/anmelden"
-              className="relative inline-block bg-primary text-primary-foreground px-8 py-4 rounded-xl font-semibold hover:bg-primary-600 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out shadow-lg"
-            >
-              Jetzt anmelden
-            </a>
-          </div>
-        </Container>
-      </section>
+      {/* CTA Banner */}
+      <BannerAnmelden />
     </div>
   );
 };

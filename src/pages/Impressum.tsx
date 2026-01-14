@@ -51,9 +51,9 @@ const Impressum: React.FC = () => {
                     Angaben gemäß § 5 TMG
                   </h2>
                   <div className="space-y-1 text-lg">
-                    <p>Fahrschule DriveAcademy GmbH</p>
-                    <p>Hauptstraße 123</p>
-                    <p>10115 Berlin</p>
+                    <p>Musterfahrschule GmbH</p>
+                    <p>Musterstraße 123</p>
+                    <p>12345 Musterstadt</p>
                   </div>
                 </div>
 
@@ -62,7 +62,7 @@ const Impressum: React.FC = () => {
                   <h2 className="text-2xl md:text-3xl font-semibold text-heading mb-4">
                     Vertreten durch
                   </h2>
-                  <p className="text-lg">Geschäftsführer: Michael Schmidt</p>
+                  <p className="text-lg">Geschäftsführer: Max Mustermann</p>
                 </div>
 
                 {/* Kontakt */}
@@ -71,9 +71,9 @@ const Impressum: React.FC = () => {
                     Kontakt
                   </h2>
                   <div className="space-y-1 text-lg">
-                    <p>Telefon: +49 (0) 30 12345678</p>
-                    <p>E-Mail: info@driveacademy.de</p>
-                    <p>Website: www.driveacademy.de</p>
+                    <p>Telefon: +49 (0) 123 45678901</p>
+                    <p>E-Mail: info@musterfahrschule.de</p>
+                    <p>Website: www.musterfahrschule.de</p>
                   </div>
                 </div>
 
@@ -84,8 +84,8 @@ const Impressum: React.FC = () => {
                   </h2>
                   <div className="space-y-1 text-lg">
                     <p>Eintragung im Handelsregister</p>
-                    <p>Registergericht: Amtsgericht Berlin-Charlottenburg</p>
-                    <p>Registernummer: HRB 123456 B</p>
+                    <p>Registergericht: Amtsgericht Musterstadt</p>
+                    <p>Registernummer: HRB 123456</p>
                   </div>
                 </div>
 
@@ -106,9 +106,9 @@ const Impressum: React.FC = () => {
                     Aufsichtsbehörde
                   </h2>
                   <div className="space-y-1 text-lg">
-                    <p>Senatsverwaltung für Bildung, Jugend und Familie</p>
-                    <p>Bernhard-Weiß-Straße 6</p>
-                    <p>10178 Berlin</p>
+                    <p>Landratsamt Musterkreis</p>
+                    <p>Musterplatz 1</p>
+                    <p>12345 Musterstadt</p>
                   </div>
                 </div>
 
@@ -118,7 +118,7 @@ const Impressum: React.FC = () => {
                     Fahrlehrererlaubnis
                   </h2>
                   <div className="space-y-1 text-lg">
-                    <p>Fahrlehrererlaubnis erteilt durch: Senatsverwaltung für Bildung, Jugend und Familie Berlin</p>
+                    <p>Fahrlehrererlaubnis erteilt durch: Landratsamt Musterkreis</p>
                     <p>Erlaubnisnummer: FL-2024-12345</p>
                   </div>
                 </div>
@@ -129,9 +129,9 @@ const Impressum: React.FC = () => {
                     Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
                   </h2>
                   <div className="space-y-1 text-lg">
-                    <p>Michael Schmidt</p>
-                    <p>Hauptstraße 123</p>
-                    <p>10115 Berlin</p>
+                    <p>Max Mustermann</p>
+                    <p>Musterstraße 123</p>
+                    <p>12345 Musterstadt</p>
                   </div>
                 </div>
 
