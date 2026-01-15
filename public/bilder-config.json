@@ -1,25 +1,33 @@
 {
   "gallerieStapel": [
     {
-      "src": "/default_images/Platzhalter_Fahrschule.webp",
-      "alt": "Fahrschule Bild 1"
+      "src": "/default_images/default_Auto_Split.webp",
+      "alt": "Fahrschule Auto"
     },
     {
-      "src": "/default_images/Platzhalter_Furhpark.webp",
-      "alt": "Fahrschule Bild 2"
+      "src": "/default_images/default_Motorrad_Split.webp",
+      "alt": "Fahrschule Motorrad"
     },
     {
-      "src": "/default_images/Platzhalter_Gruppenbild_Team.webp",
-      "alt": "Fahrschule Bild 3"
+      "src": "/default_images/default_professionelle_ausbildung.webp",
+      "alt": "Professionelle Ausbildung"
+    },
+    {
+      "src": "/default_images/default_top_moderner_furhpark.webp",
+      "alt": "Moderner Fuhrpark"
+    },
+    {
+      "src": "/default_images/default_unsere_philosophie.webp",
+      "alt": "Unsere Philosophie"
     }
   ],
   "bildVergleich": {
-    "leftImage": "/default_images/Platzhalter_Fahrschule.webp",
-    "rightImage": "/default_images/Platzhalter_Furhpark.webp"
+    "leftImage": "/default_images/default_Auto_Split.webp",
+    "rightImage": "/default_images/default_Motorrad_Split.webp"
   },
-  "professionelleFahrausbildung": "/default_images/Platzhalter_Fahrschule.webp",
-  "topmodernerFuhrpark": "/default_images/Platzhalter_Furhpark.webp",
-  "unsereWerte": "/default_images/Platzhalter_Fahrschule.webp",
+  "professionelleFahrausbildung": "/default_images/default_professionelle_ausbildung.webp",
+  "topmodernerFuhrpark": "/default_images/default_top_moderner_furhpark.webp",
+  "unsereWerte": "/default_images/default_unsere_philosophie.webp",
   "team": [
     {
       "imageSrc": "/default_images/Platzhalter_Teammitglied.webp",
