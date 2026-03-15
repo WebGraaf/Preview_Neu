@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 
 export const useScrollReveal = (threshold = 0.1) => {
-  const [isVisible, setIsVisible] = useState(false);
+  // Initialize as true to ensure content is visible on direct navigation
+  // The IntersectionObserver will update this for scroll animations
+  const [isVisible, setIsVisible] = useState(true);
   const elementRef = useRef<HTMLElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 

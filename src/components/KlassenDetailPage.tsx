@@ -120,7 +120,7 @@ export const KlassenDetailPage: React.FC<KlassenDetailPageProps> = ({ classCode 
   if (loading) {
     return (
       <div className="bg-background min-h-screen flex items-center justify-center">
-        <div className="text-text">Laden...</div>
+        <div className="text-text">Wird geladen...</div>
       </div>
     );
   }

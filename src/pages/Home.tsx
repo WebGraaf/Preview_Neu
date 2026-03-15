@@ -62,7 +62,7 @@ const Home: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center text-text">Laden...</div>
+        <div className="text-center text-text">Wird geladen...</div>
       </div>
     );
   }
